@@ -58,6 +58,7 @@ export const Container = styled.header`
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 2.0rem;
+    cursor: pointer;
   }
 
 `;

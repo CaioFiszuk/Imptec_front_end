@@ -1,10 +1,13 @@
 import { Container } from './styles';
 
+import { useAuth } from '../../hooks/auth.jsx';
+
 import { FiLogOut } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
 
 export function Header(){
+    const { signOut } = useAuth();
     return(
         <Container>
             <div className='menu'>
@@ -16,7 +19,7 @@ export function Header(){
                 </ul>
             </div>
 
-            <FiLogOut />
+            <FiLogOut onClick={signOut}/>
               
         </Container>
     );
