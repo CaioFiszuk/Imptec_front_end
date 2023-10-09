@@ -4,14 +4,14 @@ export const Container = styled.div`
 
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
   width: 90%;
   height: 43.0rem;
   background-color: #ffffff; 
 
   margin: 5.0rem auto;
 
-  border: 1px solid #cbd0d0;
+  border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
 
   position: relative;
 
@@ -21,15 +21,15 @@ export const Form = styled.form`
     justify-content: space-between;
     text-align: center;
 
-    border-bottom: 1px solid #cbd0d0;
+    border-bottom: 1px solid ${({theme})=>theme.COLORS.BORDERS};
 
     > h2{
-      color: #a0a09e;
+      color: ${({theme})=>theme.COLORS.TITLES};
       font-size: 2.0rem;
     }
 
     > svg{
-      color: #a0a09e;
+      color: ${({theme})=>theme.COLORS.TITLES};
       width: 2.0rem
       height: 2.0rem;
       margin-top: 0.8rem;
@@ -58,13 +58,13 @@ export const Form = styled.form`
     flex-direction: column;
 
     > label{
-      color: #3e7ebc;
+      color: ${({theme})=>theme.COLORS.LABELS};
       font-size: 1.4rem;
       font-weight: 700;
     }
 
     > input, select{
-      border: 1px solid #cbd0d0;
+      border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
       outline: none;
       height: 3.5rem;
 
@@ -90,7 +90,7 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-  background-color: #1ab394;
+  background-color: ${({theme})=>theme.COLORS.APP_THEME};
   color: white;
   border: none;
   border-radius: 0.5rem;

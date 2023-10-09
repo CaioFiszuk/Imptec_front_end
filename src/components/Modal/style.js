@@ -22,7 +22,7 @@ export const Container = styled.div`
   }
 
   .modalHeader{
-    background-color: #1ab394;
+    background-color: ${({theme})=>theme.COLORS.APP_THEME};
     color: white;
     padding-top: 2.0rem;
     padding-left: 1.5rem;
@@ -43,7 +43,7 @@ export const Container = styled.div`
 
   .info{
     display: flex;
-    border-top: 1px solid #cbd0d0;
+    border-top: 1px solid ${({theme})=>theme.COLORS.BORDERS};
     gap: 10.0rem;
     justify-content: space-between;
 
@@ -57,7 +57,7 @@ export const Container = styled.div`
 
         > span {
             font-size: 1.5rem;
-            color: #80806c;
+            color: ${({theme})=>theme.COLORS.CONTENT};
 
             padding-bottom: 2.0rem;
 
@@ -85,12 +85,12 @@ export const Container = styled.div`
       table-layout: auto;
   
       > thead {
-          color: #60604a;
+          color: ${({theme})=>theme.COLORS.TABLE_TITLES};
           font-size: 2.0rem; 
   
           > tr {
               > th {          
-                  border-bottom: 2px solid #cbd0d0;
+                  border-bottom: 2px solid ${({theme})=>theme.COLORS.BORDERS};
                   padding-bottom: 1.0rem;
   
                   text-align: left;
@@ -104,12 +104,12 @@ export const Container = styled.div`
       }
   
       > tbody{
-          color: #80806c;
+          color: ${({theme})=>theme.COLORS.CONTENT};
           font-size: 1.5rem;
   
           > tr{
               > td{ 
-                  border-bottom: 2px solid #cbd0d0;
+                  border-bottom: 2px solid ${({theme})=>theme.COLORS.BORDERS};
                   padding-top: 1.0rem;
                   padding-bottom: 1.0rem;
   

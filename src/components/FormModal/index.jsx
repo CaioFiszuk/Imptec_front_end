@@ -10,7 +10,7 @@ export function FormModal({isOpen, setOpen}){
                      <h2>Detalhe do processo</h2>
                    </div> 
                    <div className="modalBody">
-                     <form method="post">
+                     <section>
                         <fieldset>
                             <div className='field'>
                                 <label>Nº do Processo</label>
@@ -60,12 +60,12 @@ export function FormModal({isOpen, setOpen}){
                             </table>
                             <div className='field'>
                                 <label>Anexar Arquivo(s) do Processo</label>
-                                <input type="file" />
+                                <input type="file" className='file'/>
                             </div>
                         </fieldset>
 
                         <Button>Atualizar [C/L]</Button>
-                     </form>
+                     </section>
                    </div> 
                  </div>   
               </div>

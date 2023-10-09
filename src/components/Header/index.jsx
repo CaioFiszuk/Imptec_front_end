@@ -16,6 +16,7 @@ export function Header(){
                     <li><Link to="/" className='firstLink'><strong>Voltar para o menu inicial</strong></Link></li>
                     <li><a href="#"><strong>Opções de Cálculo</strong></a></li>
                     <li><a href="#"><strong>Contatos</strong></a></li>
+                    <li><Link to="/cadastro">cadastro</Link></li>
                 </ul>
             </div>
 

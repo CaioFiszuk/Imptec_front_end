@@ -22,7 +22,7 @@ export const Container = styled.div`
   }
 
   .modalHeader{
-    background-color: #1ab394;
+    background-color: ${({theme})=>theme.COLORS.APP_THEME};
     color: white;
     padding-top: 2.0rem;
     padding-left: 1.5rem;
@@ -40,10 +40,13 @@ export const Container = styled.div`
     padding-right: 1.5rem;
     padding-bottom: 4.5rem;
 
-    > form{
-      border: 1px solid black;
+    > section{
+
+      display: flex;
+      flex-direction: column;
 
       > fieldset{
+         border: none;
          display: flex;
          gap: 1.5rem;
 
@@ -54,13 +57,13 @@ export const Container = styled.div`
           flex-direction: column;
 
           > label {
-            color: #3e7ebc;
+            color: ${({theme})=>theme.COLORS.LABELS};
             font-size: 1.4rem;
             font-weight: 700;
           }
 
           > select, input{
-            border: 1px solid #cbd0d0;
+            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
             outline: none;
             height: 3.5rem;
             min-width: 24.0rem;
@@ -69,6 +72,36 @@ export const Container = styled.div`
       
             padding-left: 1.0rem;
           }
+
+          .file {
+            border: none;
+          }
+         }
+
+         > table {
+           margin-right: 1.5rem;
+            > thead {
+              color: gray;
+              > tr{
+                background-color: #f9f9f9;
+                font-size: 1.6rem;
+                > th {
+                  text-align: left;
+                  padding: 1.0rem;
+                  border-bottom: 1px solid ${({theme})=>theme.COLORS.BORDERS};
+                }
+              }
+            }
+            > tbody {
+               color: #3e7ebc;
+               > tr {
+                font-size: 1.6rem;
+                 > td {
+                  padding: 1.0rem;
+                  border-bottom: 1px solid ${({theme})=>theme.COLORS.BORDERS};
+                 }
+               }
+            }
          }
       }
     }
@@ -76,7 +109,7 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.button`
-background-color: #1ab394;
+background-color: ${({theme})=>theme.COLORS.APP_THEME};
 color: white;
 border: none;
 border-radius: 0.5rem;
@@ -84,9 +117,7 @@ padding: 1.0rem;
 
 font-size: 1.6rem;
 
-position: absolute;
-top: 365px;
-left: 970px;
+align-self: self-end;
 
 cursor: pointer;
 

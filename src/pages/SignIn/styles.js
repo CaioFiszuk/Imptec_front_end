@@ -8,55 +8,63 @@ export const Container = styled.div`
       width: 50%;
       height: 70vh;
 
-      background-color: #1ab394;
+      background-color: ${({theme})=>theme.COLORS.APP_THEME};
 
-      > div {
-          padding-top: 8.0rem;
-          padding-left: 9.0rem;
-          padding-right: 7.0rem;
+      display: grid;
+      grid-template-colums: repeat(1, auto);
 
-         > div {
-            display: flex;
-            flex-direction: column;
-            gap: 1.0rem;
-            padding-left: 8.0rem;
-   
-            > label {
-               color: white;
-               font-size: 2.0rem;
-               font-weight: 400;
-               padding-top: 1.5rem;
-            }
-   
-            > input {
-               width: 70%;
-               height: 3.5rem;
-               outline: none;
-               border: none;
-            }
+      .title{
+         display: flex;
+         flex-direction: column;
+         padding-top: 5.0rem;
+
+         > h1 {
+            color: white;
+            text-align: center;
          }
       }
 
-      > button {
-         background-color: white;
-         color: #1ab394;
+      .field{
+         display: flex;
+         flex-direction: column;
+         padding-left: 13.0rem;
 
-         border: none;
-         border-radius: 1.0rem;
+         > label {
+            color: white;
+            font-size: 2.0rem;
+            font-weight: 400;
+            padding-top: 1.5rem;
+         }
 
-         padding: 2.0rem;
+         > input {
+            width: 70%;
+            height: 3.5rem;
+            outline: none;
+            border: none;
+         }
+      }  
 
-         font-size: 1.5rem;
+      .button{
+         display: grid;
+         place-content: center;
 
-         width: 15.0rem;
-
-         margin-top: 5.0rem;
-         margin-left: 22.0rem;
-
-         cursor: pointer;
-
-         &:hover {
-            background-color: #dddddd;
+         > button {
+            background-color: white;
+            color: ${({theme})=>theme.COLORS.APP_THEME};
+   
+            border: none;
+            border-radius: 1.0rem;
+   
+            padding: 1.5rem;
+   
+            font-size: 1.5rem;
+            width: 35.0rem;
+   
+            cursor: pointer;
+   
+            &:hover {
+               background-color: #dddddd;
+            }
          }
       }
 

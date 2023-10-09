@@ -38,7 +38,7 @@ function AuthProvider({children}){
 
         setData({token});
       }
-    });
+    }, []);
 
 
     return(

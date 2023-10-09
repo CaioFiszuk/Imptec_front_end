@@ -15,18 +15,23 @@ export function SignIn(){
     return(
         <Container>
            <main>
-              <div>
-                  <div>
+                 <div className='title'>
+                     <h1>IMPTEC</h1>
+                 </div>
+
+                  <div className='field'>
                       <label>E-mail</label>
                       <input type="email" onChange={e => setEmail(e.target.value)}/>
                   </div>
-                  <div>
+
+                  <div className='field'>
                       <label>Senha</label>
                       <input type="password" onChange={e => setPassword(e.target.value)}/>
                   </div>
-              </div>
 
-              <button type='button' onClick={handleSignIn}>Login</button>
+                  <div className='button'>
+                    <button type='button' onClick={handleSignIn}>Login</button>
+                    </div>
            </main>
         </Container>
     );

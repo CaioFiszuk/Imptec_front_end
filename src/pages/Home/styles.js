@@ -18,7 +18,7 @@ export const Container = styled.div`
     row-gap: 1.5rem;
 
     > div{
-        border: 1px solid #cbd0d0;
+        border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
         border-radius: 0.5rem;
         display: flex;
         gap: 5.0rem;
@@ -72,7 +72,7 @@ export const Container = styled.div`
 
     .stock {
         border-radius: 0.5rem;
-        background-color: #1ab394;
+        background-color: ${({theme})=>theme.COLORS.APP_THEME};
         color: white;
         padding: 2.0rem;
 
@@ -102,7 +102,7 @@ export const Container = styled.div`
         row-gap: 1.5rem;
 
         > div {
-          border: 1px solid #cbd0d0;
+          border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
           border-radius: 0.5rem;
           display: flex;
           gap: 5.0rem;
@@ -169,7 +169,7 @@ export const Container = styled.div`
     grid-column: 1/2;
 
     > h3 {
-      color: #60604a;
+      color: ${({theme})=>theme.COLORS.TABLE_TITLES};
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
     }
@@ -179,15 +179,15 @@ export const Container = styled.div`
       list-style: none;
       
       > li {
-        color: #80806c;
+        color: ${({theme})=>theme.COLORS.CONTENT};
         font-size: 1.5rem;
-        border-top: 1px solid #cbd0d0;
-        border-bottom: 1px solid #cbd0d0;
+        border-top: 1px solid ${({theme})=>theme.COLORS.BORDERS};
+        border-bottom: 1px solid ${({theme})=>theme.COLORS.BORDERS};
         padding-bottom: 1.0rem;
 
         &::before{
           content:'\\2022 ';
-          color: #1ab394;
+          color: ${({theme})=>theme.COLORS.APP_THEME};
           font-weight: bold;
           font-size: 3.0rem;
           padding-right: 4.0rem;
@@ -206,7 +206,7 @@ export const Container = styled.div`
     grid-template-rows: repeat(2, 11.0rem);
 
     > div {
-        border: 1px solid #cbd0d0;
+        border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
         border-radius: 0.5rem;
         display: flex;
         gap: 5.0rem;
@@ -252,18 +252,18 @@ export const Container = styled.div`
       width: 23.0rem;
 
       > h4 {
-        color: #60604a;
+        color: ${({theme})=>theme.COLORS.TABLE_TITLES};
         font-size: 1.2rem;
       }
 
       > h5 {
-        color: #80806c;
+        color: ${({theme})=>theme.COLORS.CONTENT};
         font-size: 2.2rem;
         font-weight: 300;
       }
 
       > p {
-        color: #80806c;
+        color: ${({theme})=>theme.COLORS.CONTENT};
         font-size: 1.2rem;
       }
     }

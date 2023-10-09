@@ -27,20 +27,20 @@ export const Container = styled.header`
           padding: 1.5rem 2.0rem;
           display: block;
 
-          color: #a0a09e;
+          color: ${({theme})=>theme.COLORS.TITLES};
 
           font-size: 15px;
         }
 
         .firstLink{
-          color: #1ab394;
+          color: ${({theme})=>theme.COLORS.APP_THEME};
          }
       }
     }
    }
 
    .logo{
-    background-color: #1ab394;
+    background-color: ${({theme})=>theme.COLORS.APP_THEME};
     color: #ffffff;
     border: none;
     
