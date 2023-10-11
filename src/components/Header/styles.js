@@ -29,13 +29,46 @@ export const Container = styled.header`
 
           color: ${({theme})=>theme.COLORS.TITLES};
 
-          font-size: 15px;
+          font-size: 1.5rem;
         }
 
         .firstLink{
           color: ${({theme})=>theme.COLORS.APP_THEME};
          }
       }
+
+      .dropdown {
+        position: relative;
+      }
+    
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        list-style: none;
+        padding: 0;
+    }
+    
+    .dropdown-menu li {
+        margin: 0;
+    }
+    
+    .dropdown-menu li a {
+        display: block;
+        padding: 10px 20px;
+        color: ${({theme})=>theme.COLORS.TITLES};
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+    
+    .dropdown-menu li a:hover {
+        background-color: ${({theme})=>theme.COLORS.TITLES};
+        color: #ffffff;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
     }
    }
 
@@ -54,11 +87,14 @@ export const Container = styled.header`
     cursor: pointer;
    }
 
-   > svg{
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: 2.0rem;
-    cursor: pointer;
+   > a {
+    > svg{
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-right: 2.0rem;
+      cursor: pointer;
+   }
+
   }
 
 `;

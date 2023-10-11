@@ -6,6 +6,7 @@ import { PendingCalculations } from '../pages/PendingCalculations/index';
 import { InvoicedCalculations } from '../pages/InvoicedCalculations/index';
 import { PeopleRegister } from '../pages/PeopleRegister/index';
 import { CalculationsHistoric } from '../pages/CalculationsHistoric/index';
+import { Contacts } from '../pages/Contacts/index';
 
 export function AppRoutes(){
     return(
@@ -17,6 +18,7 @@ export function AppRoutes(){
             <Route path='/calculos-faturados' element={<InvoicedCalculations />}/>
             <Route path='/cadastro' element={<PeopleRegister />}/>
             <Route path='/historico-de-calculos' element={<CalculationsHistoric />} />
+            <Route path='/contatos' element={<Contacts />}/>
         </Routes>
     );
 }

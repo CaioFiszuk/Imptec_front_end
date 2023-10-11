@@ -25,10 +25,12 @@ export function PeopleRegister(){
    const [company, setCompany] = useState("");
    const [response, setResponse] = useState("");
 
-   const token = localStorage.getItem("@imptec:token");
-
+   
    async function handleRegister(){
- 
+     
+    const token = localStorage.getItem("@imptec:token");
+   
+    
     const payload = {
       name: name,
       document: document,
@@ -43,15 +45,14 @@ export function PeopleRegister(){
       email: email,
       phone: phone
     };
-
-
+    
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json'
     };
   
-
+   
     try {
       const res = await axios.post("https://exato.m2fsolucoes.com/api/peaple/create", payload, { headers });
       setResponse(res.data);
@@ -98,6 +99,7 @@ export function PeopleRegister(){
                      onChange={e => setType(e.target.value)}
                      value={type}
                    >
+                     <option value="">Selecione</option>
                      <option value="ADV">Advogado</option>
                      <option value="ADM">Administrador</option>
                      <option value="CLL">Calculista</option>
@@ -189,7 +191,7 @@ export function PeopleRegister(){
               </fieldset>
 
               <Button 
-              type='submit'
+              type='button'
               onClick={handleRegister}
               >Solicitar [C/L]</Button>
 

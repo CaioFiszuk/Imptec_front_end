@@ -28,6 +28,7 @@ function AuthProvider({children}){
     localStorage.removeItem("@imptec:token");
 
     setData({});
+    
   }
 
     useEffect(()=>{
