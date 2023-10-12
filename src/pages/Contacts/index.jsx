@@ -17,7 +17,11 @@ export function Contacts(){
     const [accountings, setAccountings] = useState([]);
 
        const deletePerson =  async (id)=>{
-          await axios.delete(`https://exato.m2fsolucoes.com/api/peaple/delete/${id}`);
+         const payload = {
+          id: id
+        };
+
+          await axios.post(`https://exato.m2fsolucoes.com/api/peaple/delete/`, payload);
        }
 
       const getLawyers = async ()=>{

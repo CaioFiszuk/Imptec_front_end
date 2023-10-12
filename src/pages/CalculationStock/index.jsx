@@ -1,14 +1,36 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+//Styles
 import { Container } from './styles';
+
+//Paginator
 import ReactPaginate from 'react-paginate';
 
+//Icons
 import { TbElevator } from 'react-icons/tb';
 
+//Components
 import { Header } from '../../components/Header/index';
 import { FormModal } from '../../components/FormModal/index';
-import { useState } from 'react';
 
 export function CalculationStock(){
   const [open, setOpen] = useState(false);
+  const [stocks, setStocks] = useState([]);
+
+  const getStocks = async ()=>{
+    const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getAll");
+
+    const data = response.data;
+
+    setStocks(data);
+
+  }
+
+  useEffect(()=>{
+    getStocks()
+ }, []);
+
     return(
         <Container>
             <Header />
@@ -36,56 +58,21 @@ export function CalculationStock(){
                        </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>20/09/2023</td>
-                        <td onClick={()=>setOpen(!open)} className='link'>123456-78.9012.3.45.6790</td>
-                        <td>Contestação</td>
-                        <td>Inicial</td>
-                        <td>Advogado 2</td>
-                        <td>Reclamante 1</td>
-                        <td>Reclamado 1</td>
-                        <td>Novo</td>
-                      </tr>
-                      <tr>
-                        <td>20/09/2023</td>
-                        <td onClick={()=>setOpen(!open)} className='link'>123456-78.9012.3.45.6790</td>
-                        <td>Liquidação</td>
-                        <td>Inicial</td>
-                        <td>Advogado 5</td>
-                        <td>Reclamante 2</td>
-                        <td>Reclamado 2</td>
-                        <td>Calculado</td>
-                      </tr>
-                      <tr>
-                        <td>20/09/2023</td>
-                        <td onClick={()=>setOpen(!open)} className='link'>123456-78.9012.3.45.6790</td>
-                        <td>Liquidação</td>
-                        <td>Inicial</td>
-                        <td>Advogado 6</td>
-                        <td>Reclamante 3</td>
-                        <td>Reclamado 3</td>
-                        <td>Faturado</td>
-                      </tr>
-                      <tr>
-                        <td>20/09/2023</td>
-                        <td onClick={()=>setOpen(!open)} className='link'>123456-78.9012.3.45.6790</td>
-                        <td>Liquidação</td>
-                        <td>Inicial</td>
-                        <td>Advogado 3</td>
-                        <td>Reclamante 4</td>
-                        <td>Reclamado 4</td>
-                        <td>Enviado</td>
-                      </tr>
-                      <tr>
-                        <td>20/09/2023</td>
-                        <td onClick={()=>setOpen(!open)} className='link'>123456-78.9012.3.45.6790</td>
-                        <td>Liquidação</td>
-                        <td>Inicial</td>
-                        <td>Advogado 1</td>
-                        <td>Reclamante 5</td>
-                        <td>Reclamado 5</td>
-                        <td>Calculando</td>
-                      </tr>
+                    {(
+                       stocks.map((stock)=>(
+                       <tr key={stock.id}>
+                         <td>{stock.due_date}</td>
+                         <td onClick={()=>setOpen(!open)} className='link'>{stock.number}</td>
+                         <td>{stock.type}</td>
+                         <td>{stock.service.name}</td>
+                         <td>{stock.peaple.name}</td>
+                         <td>{stock.complain}</td>
+                         <td>{stock.claimed}</td>
+                         <td>{stock.status}</td>
+                       </tr>
+                      ))
+                    )  
+                   }
                     </tbody>
                 </table>
 

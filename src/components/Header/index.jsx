@@ -27,11 +27,11 @@ export function Header(){
                         <ul className='dropdown-menu'>
                            <li><Link to="/cadastro"><strong>Cadastro de Pessoas</strong></Link></li>
                            <li><a href="#">Criar Cálculo</a></li>
-                           <li><a href="#">Bolsão de Solicitações</a></li>
-                           <li><a href="#">Histórico de Cálculos</a></li>
+                           <li><Link to="/bolsao-de-calculos"><strong>Bolsão de Solicitações</strong></Link></li>
+                           <li><Link to="/historico-de-calculos"><strong>Histórico de Cálculos</strong></Link></li>
                            <li><a href="#">Cálculos Pendentes</a></li>
                            <li><a href="#">Contestações Pendentes</a></li>
-                           <li><a href="#">Cálculos Faturados</a></li>
+                           <li><Link to="/calculos-faturados"><strong>Cálculos Faturados</strong></Link></li>
                         </ul>
                     </li>
                     <li>

@@ -23,11 +23,28 @@ export function CalculationRequest(){
                   </div>
                   <div className='field'>
                     <label>Tipo de Solicitação</label>
-                    <select>Contestação</select>
+                    <select>
+                      <option value="">Selecione</option>
+                      <option value="Liquidação">Liquidação</option>
+                      <option value="Contestação">Contestação</option>
+                    </select>
                   </div>
                   <div className='field'>
                     <label>Tipo de Trabalho</label>
-                    <select>Selecione</select>
+                    <select>
+                      <option value="">Selecione</option>
+                      <option value="1">Inicial</option>
+                      <option value="2">Sentença</option>
+                      <option value="3">Sentença Recurso Ordinário</option>
+                      <option value="4">Acórdão</option>
+                      <option value="5">Acórdão Recurso Ordinário</option>
+                      <option value="6">Acórdão Recurso de Revista</option>
+                      <option value="7">Contestar Cálculo Reclamante</option>
+                      <option value="9">Contestar Cálculo Reclamada</option>
+                      <option value="10">Contestar Laudo Pericial</option>
+                      <option value="11">Embargos de Execução</option>
+                      <option value="13">Descriminização de Verbas</option>
+                    </select>
                   </div>
                   <div className='field'>
                     <label>Prazo de Entrega</label>
@@ -35,7 +52,13 @@ export function CalculationRequest(){
                   </div>
                   <div className='field'>
                     <label>Solicitante</label>
-                    <select>Selecione</select>
+                    <select>
+                     <option value="">Selecione</option>
+                     <option value="4">Advogado 1</option>
+                     <option value="6">Advogado 2</option>
+                     <option value="8">Advogado 4</option>
+                     <option value="9">Advogado 5</option>
+                    </select>
                   </div>
                   <div className='field'>
                     <label>Reclamante</label>
