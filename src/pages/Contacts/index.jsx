@@ -6,6 +6,7 @@ import { Container } from "./styles";
 
 //Components
 import { Header } from '../../components/Header/index';
+import { Pagination } from '../../components/Pagination/index';
 
 //Icons
 import { BiSolidUser } from 'react-icons/bi';
@@ -21,13 +22,13 @@ export function Contacts(){
        const deletePerson =  async (id)=>{
          const payload = {
           id: id
-        };
+         };
 
-        const headers = {
+         const headers = {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json'
-        };
+         };
 
           await axios.post(`https://exato.m2fsolucoes.com/api/peaple/delete/`, payload, {headers});
        }
@@ -54,6 +55,21 @@ export function Contacts(){
         const data = response.data;
 
         setAccountings(data);
+      }
+
+      //Pagination Variables
+      const [pageNumber, setPageNumber] = useState(0);
+      const itemsPerPage = 4;
+      const pagesVisited = pageNumber * itemsPerPage;
+       const displayLawyers = lawyers.slice(pagesVisited, pagesVisited + itemsPerPage);
+       const displayAdmins = admins.slice(pagesVisited, pagesVisited + itemsPerPage);
+       const displayAccountings = accountings.slice(pagesVisited, pagesVisited + itemsPerPage);
+      const lawyersPageCount = Math.ceil(lawyers.length / itemsPerPage);
+      const adminsPageCount = Math.ceil(admins.length / itemsPerPage);
+      const accountingsPageCount = Math.ceil(accountings.length / itemsPerPage);
+
+      const changePage = ({selected})=>{
+         setPageNumber(selected);
       }
   
        useEffect(()=>{
@@ -109,7 +125,7 @@ export function Contacts(){
                 </thead>
                 <tbody>
                 {(
-                  lawyers.map((lawyer)=>(
+                  displayLawyers.map((lawyer)=>(
                     <tr key={lawyer.id}>
                        <td>{lawyer.name}</td>
                        <td>{lawyer.email}</td>
@@ -122,6 +138,7 @@ export function Contacts(){
                 }
                 </tbody>
                </table>
+               <Pagination pageCount={lawyersPageCount} changePage={changePage}/>
             </div>
 
             <div className="content" id="content2">
@@ -137,7 +154,7 @@ export function Contacts(){
                 </thead>
                 <tbody>
                 {(
-                  admins.map((admin)=>(
+                  displayAdmins.map((admin)=>(
                     <tr key={admin.id}>
                        <td>{admin.name}</td>
                        <td>{admin.email}</td>
@@ -150,6 +167,7 @@ export function Contacts(){
                 }
                 </tbody>
                </table>
+               <Pagination pageCount={adminsPageCount} changePage={changePage}/>
             </div>
 
             <div className="content" id="content3">
@@ -165,19 +183,20 @@ export function Contacts(){
                 </thead>
                 <tbody>
                 {(
-                  accountings.map((accounting)=>(
-                    <tr key={accounting.id}>
-                       <td>{accounting.name}</td>
-                       <td>{accounting.email}</td>
-                       <td>{accounting.phone}</td>
-                       <td>{accounting.company}</td>
-                       <td><AiFillEdit /> <AiFillDelete onClick={()=> deletePerson(accounting.id)}/></td>
+                  displayAccountings.map((admin)=>(
+                    <tr key={admin.id}>
+                       <td>{admin.name}</td>
+                       <td>{admin.email}</td>
+                       <td>{admin.phone}</td>
+                       <td>{admin.company}</td>
+                       <td><AiFillEdit /> <AiFillDelete /></td>
                     </tr>
                     ))
                   )  
                 }
                 </tbody>
                </table>
+               <Pagination pageCount={accountingsPageCount} changePage={changePage}/>
             </div>
 
         </section>

@@ -1,12 +1,20 @@
+import ReactPaginate from "react-paginate";
+import { Container } from './styles';
 
-export function Pagination({pages, setCurrentPage}){
+export function Pagination({pageCount, changePage}){
     return(
-        <div>
-        {
-                Array.from(Array(pages), (item, index)=>{
-                return <button value={index} onClick={(e)=>setCurrentPage(Number(e.target.value))}>{index + 1}</button>
-            })
-          }
-        </div>
+        <Container>
+        <ReactPaginate
+           nextLabel=">>"
+           pageCount={pageCount}
+           previousLabel="<<"
+           containerClassName='paginator'
+           pageClassName='pageNumber'
+           previousClassName='previousPage'
+           nextClassName='nextPage'
+           activeClassName='activePage'
+           onPageChange={changePage}
+        />
+       </Container>
     );
 }

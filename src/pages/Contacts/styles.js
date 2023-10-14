@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 > section{
     width: 95%;
-    height: 45.0rem;
+    height: 47.0rem;
     background-color: #ffffff; 
  
     margin: 5.0rem auto;
