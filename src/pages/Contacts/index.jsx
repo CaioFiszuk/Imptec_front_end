@@ -15,13 +15,21 @@ export function Contacts(){
     const [lawyers, setLawyers] = useState([]);
     const [admins, setAdmins] = useState([]);
     const [accountings, setAccountings] = useState([]);
+    const token = localStorage.getItem("@imptec:token");
+
 
        const deletePerson =  async (id)=>{
          const payload = {
           id: id
         };
 
-          await axios.post(`https://exato.m2fsolucoes.com/api/peaple/delete/`, payload);
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json'
+        };
+
+          await axios.post(`https://exato.m2fsolucoes.com/api/peaple/delete/`, payload, {headers});
        }
 
       const getLawyers = async ()=>{
@@ -107,7 +115,7 @@ export function Contacts(){
                        <td>{lawyer.email}</td>
                        <td>{lawyer.phone}</td>
                        <td>{lawyer.company}</td>
-                       <td><AiFillEdit /> <AiFillDelete /></td>
+                       <td><AiFillEdit /> <AiFillDelete onClick={()=>deletePerson(lawyer.id)}/></td>
                     </tr>
                     ))
                   )  

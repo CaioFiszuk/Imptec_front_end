@@ -24,7 +24,7 @@ export const Container = styled.div`
 
     border-bottom: 1px solid ${({theme})=>theme.COLORS.BORDERS};
 
-    margin-bottom: 2.0rem;
+    margin-bottom: 1.5rem;
 
     > h2{
       color: ${({theme})=>theme.COLORS.TITLES};
@@ -134,4 +134,35 @@ export const Container = styled.div`
     gap: 1.0rem;
     align-items: center;
 }
+
+
+.paginationBox{
+    padding-right: 2.5rem;
+
+    align-self: flex-end;
+    margin-top: 2.0rem;
+
+    display: flex;
+    justify-content: end;
+
+    .paginator{
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+    
+        .pageNumber, .previousPage, .nextPage{
+            padding: 1.0rem;
+            cursor: pointer;
+            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
+            color: ${({theme})=>theme.COLORS.CONTENT};
+        }
+
+        .activePage{
+          background-color: ${({theme})=>theme.COLORS.APP_THEME};
+          color: #ffffff;
+        }
+      }
+  }
 `;

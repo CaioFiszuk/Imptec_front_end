@@ -4,19 +4,20 @@ import { useEffect, useState } from 'react';
 //Styles
 import { Container } from './styles';
 
-//Paginator
-import ReactPaginate from 'react-paginate';
-
 //Icons
 import { TbElevator } from 'react-icons/tb';
 
 //Components
 import { Header } from '../../components/Header/index';
 import { FormModal } from '../../components/FormModal/index';
+import { Pagination } from '../../components/Pagination';
+
 
 export function CalculationStock(){
   const [open, setOpen] = useState(false);
   const [stocks, setStocks] = useState([]);
+  const [itensPerPage, setItensPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const getStocks = async ()=>{
     const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getAll");
@@ -26,30 +27,18 @@ export function CalculationStock(){
     setStocks(data);
   }
 
-  const [pageNumber, setPageNumber] = useState(0);
-  const itemsPerPage = 5;
-  const pagesVisited = pageNumber * itemsPerPage;
-  const displayItems = stocks.slice(pagesVisited, pagesVisited + itemsPerPage).map((stock)=>(
-    <tr key={stock.id}>
-      <td>{stock.due_date}</td>
-      <td onClick={()=>setOpen(!open)} className='link'>{stock.number}</td>
-      <td>{stock.type}</td>
-      <td>{stock.service.name}</td>
-      <td>{stock.peaple.name}</td>
-      <td>{stock.complain}</td>
-      <td>{stock.claimed}</td>
-      <td>{stock.status}</td>
-    </tr>
-  ));
-  const pageCount = Math.ceil(stocks.length / itemsPerPage);
-  
-  const changePage = ({selected})=>{
-     setPageNumber(selected);
-  }
+  const pages = Math.ceil(stocks.length / itensPerPage);
+  const startIndex = currentPage * itensPerPage;
+  const endIndex = startIndex + itensPerPage;
+  const currentItens = stocks.slice(startIndex, endIndex);
 
   useEffect(()=>{
     getStocks()
  }, []);
+
+ useEffect(()=>{
+   setCurrentPage(0)
+ }, [itensPerPage]);
 
     return(
         <Container>
@@ -78,25 +67,28 @@ export function CalculationStock(){
                        </tr>
                     </thead>
                     <tbody>
-                    {
-                    displayItems  
-                   }
+                     {
+                        currentItens.map((stock)=>(
+                            <tr key={stock.id}>
+                              <td>{stock.due_date}</td>
+                              <td onClick={()=>setOpen(!open)} className='link'>{stock.number}</td>
+                              <td>{stock.type}</td>
+                              <td>{stock.service.name}</td>
+                              <td>{stock.peaple.name}</td>
+                              <td>{stock.complain}</td>
+                              <td>{stock.claimed}</td>
+                              <td>{stock.status}</td>
+                            </tr>
+                        ))
+                     }
+                    
                     </tbody>
                 </table>
 
-                <div className='paginationBox'>
-                    <ReactPaginate
-                        nextLabel=">>"
-                        pageCount={pageCount}
-                        previousLabel="<<"
-                        containerClassName='paginator'
-                        pageClassName='pageNumber'
-                        previousClassName='previousPage'
-                        nextClassName='nextPage'
-                        activeClassName='activePage'
-                        onPageChange={changePage}
-                    />
-                </div>
+
+
+                 <Pagination pages={pages} setCurrentPage={setCurrentPage}/>
+
             </section>
 
             <FormModal 
