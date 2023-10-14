@@ -24,7 +24,27 @@ export function CalculationStock(){
     const data = response.data;
 
     setStocks(data);
+  }
 
+  const [pageNumber, setPageNumber] = useState(0);
+  const itemsPerPage = 5;
+  const pagesVisited = pageNumber * itemsPerPage;
+  const displayItems = stocks.slice(pagesVisited, pagesVisited + itemsPerPage).map((stock)=>(
+    <tr key={stock.id}>
+      <td>{stock.due_date}</td>
+      <td onClick={()=>setOpen(!open)} className='link'>{stock.number}</td>
+      <td>{stock.type}</td>
+      <td>{stock.service.name}</td>
+      <td>{stock.peaple.name}</td>
+      <td>{stock.complain}</td>
+      <td>{stock.claimed}</td>
+      <td>{stock.status}</td>
+    </tr>
+  ));
+  const pageCount = Math.ceil(stocks.length / itemsPerPage);
+  
+  const changePage = ({selected})=>{
+     setPageNumber(selected);
   }
 
   useEffect(()=>{
@@ -58,34 +78,23 @@ export function CalculationStock(){
                        </tr>
                     </thead>
                     <tbody>
-                    {(
-                       stocks.map((stock)=>(
-                       <tr key={stock.id}>
-                         <td>{stock.due_date}</td>
-                         <td onClick={()=>setOpen(!open)} className='link'>{stock.number}</td>
-                         <td>{stock.type}</td>
-                         <td>{stock.service.name}</td>
-                         <td>{stock.peaple.name}</td>
-                         <td>{stock.complain}</td>
-                         <td>{stock.claimed}</td>
-                         <td>{stock.status}</td>
-                       </tr>
-                      ))
-                    )  
+                    {
+                    displayItems  
                    }
                     </tbody>
                 </table>
 
                 <div className='paginationBox'>
                     <ReactPaginate
-                        breakLabel="..."
                         nextLabel=">>"
-                        pageCount={2}
+                        pageCount={pageCount}
                         previousLabel="<<"
                         containerClassName='paginator'
                         pageClassName='pageNumber'
                         previousClassName='previousPage'
                         nextClassName='nextPage'
+                        activeClassName='activePage'
+                        onPageChange={changePage}
                     />
                 </div>
             </section>

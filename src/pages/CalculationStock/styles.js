@@ -115,25 +115,16 @@ export const Container = styled.div`
         align-items: center;
         font-size: 1.5rem;
     
-        .pageNumber{
+        .pageNumber, .previousPage, .nextPage{
             padding: 1.0rem;
             cursor: pointer;
             border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
             color: ${({theme})=>theme.COLORS.CONTENT};
         }
-    
-        .previousPage{
-            padding: 1.0rem;
-            cursor: pointer;
-            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
-            color: ${({theme})=>theme.COLORS.CONTENT};
-        }
-    
-        .nextPage{
-            padding: 1.0rem;
-            cursor: pointer;
-            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
-            color: ${({theme})=>theme.COLORS.CONTENT};
+
+        .activePage{
+          background-color: ${({theme})=>theme.COLORS.APP_THEME};
+          color: #ffffff;
         }
       }
   }

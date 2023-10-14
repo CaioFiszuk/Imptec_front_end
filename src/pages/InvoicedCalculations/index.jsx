@@ -1,14 +1,38 @@
-import { Container } from './styles';
-import ReactPaginate from 'react-paginate';
-import { Modal } from '../../components/Modal/index';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
+//Styles
+import { Container } from './styles';
+
+//Paginator
+import ReactPaginate from 'react-paginate';
+
+//Components
+import { Modal } from '../../components/Modal/index';
 import { Header } from '../../components/Header/index';
 
+
+//Icons
 import { TbElevator } from 'react-icons/tb';
 
 export function InvoicedCalculations(){
     const [open, setOpen] = useState(false);
+    const [invoices, setInvoices] = useState([]);
+
+    const getInvoices = async ()=>{
+        const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getByStatus/Novo");
+
+        const data = response.data;
+
+        console.log(data);
+
+        setInvoices(data);
+    }
+
+    useEffect(()=>{
+       getInvoices()
+    }, []);
+
     return(
         <Container>
             <Header />
