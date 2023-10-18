@@ -16,6 +16,7 @@ export function Contacts(){
     const [lawyers, setLawyers] = useState([]);
     const [admins, setAdmins] = useState([]);
     const [accountings, setAccountings] = useState([]);
+    const [query, setQuery] = useState("");
     const token = localStorage.getItem("@imptec:token");
 
 
@@ -103,7 +104,11 @@ export function Contacts(){
             </div>
 
             <div className='searchField'>
-                <input type="search" placeholder='Pesquisar' />
+                <input 
+                type="search" 
+                placeholder='Pesquisar' 
+                onChange={e=>setQuery(e.target.value)}
+                />
             </div>
 
             <div className="tabs">
@@ -125,7 +130,9 @@ export function Contacts(){
                 </thead>
                 <tbody>
                 {(
-                  displayLawyers.map((lawyer)=>(
+                  displayLawyers.filter(
+                    lawyer=>lawyer.name.toLowerCase().includes(query)
+                    ).map((lawyer)=>(
                     <tr key={lawyer.id}>
                        <td>{lawyer.name}</td>
                        <td>{lawyer.email}</td>
@@ -154,7 +161,9 @@ export function Contacts(){
                 </thead>
                 <tbody>
                 {(
-                  displayAdmins.map((admin)=>(
+                  displayAdmins.filter(
+                    admin=>admin.name.toLowerCase().includes(query)
+                    ).map((admin)=>(
                     <tr key={admin.id}>
                        <td>{admin.name}</td>
                        <td>{admin.email}</td>
@@ -183,12 +192,14 @@ export function Contacts(){
                 </thead>
                 <tbody>
                 {(
-                  displayAccountings.map((admin)=>(
-                    <tr key={admin.id}>
-                       <td>{admin.name}</td>
-                       <td>{admin.email}</td>
-                       <td>{admin.phone}</td>
-                       <td>{admin.company}</td>
+                  displayAccountings.filter(
+                    accounting=>accounting.name.toLowerCase().includes(query)
+                    ).map((accounting)=>(
+                    <tr key={accounting.id}>
+                       <td>{accounting.name}</td>
+                       <td>{accounting.email}</td>
+                       <td>{accounting.phone}</td>
+                       <td>{accounting.company}</td>
                        <td><AiFillEdit /> <AiFillDelete /></td>
                     </tr>
                     ))
