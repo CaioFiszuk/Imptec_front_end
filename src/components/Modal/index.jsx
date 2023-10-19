@@ -1,6 +1,6 @@
 import { Container } from './style';
 
-export function Modal({isOpen, setOpen}){
+export function Modal({isOpen, setOpen, dataNumber, dataComplain, dataClaimed, dataType, dataServiceName, dataPrice, dataPersonName, dataDueDate, dataStatus}){
     if(isOpen){
         return(
             <Container>
@@ -13,14 +13,14 @@ export function Modal({isOpen, setOpen}){
                     <div className='modalBody'>
                         <div className="info">
                           <div>
-                            <span><strong>Sacado:</strong>Advogado 2</span>
-                            <span><strong>Vencimento:</strong>10/09/2023</span>
+                            <span><strong>Sacado:</strong>{dataPersonName}</span>
+                            <span><strong>Vencimento:</strong>{dataDueDate}</span>
                             <span><strong>Período:</strong>01/08/2023 - 30/08/2023</span>
                           </div>
 
                           <div>
-                          <span><strong>Valor Total:</strong>R$ 60,00</span>
-                          <span><strong>Status:</strong><p>Vencido</p></span>
+                          <span><strong>Valor Total:</strong>{dataPrice}</span>
+                          <span><strong>Status:</strong><p>{dataStatus}</p></span>
                           </div>
                         </div>
                       <div className="modalTable">
@@ -37,44 +37,12 @@ export function Modal({isOpen, setOpen}){
                            </thead>
                            <tbody>
                             <tr>
-                              <td>123456-78.9012.3.45.6790</td>
-                              <td>Reclamante 96</td>
-                              <td>Reclamado 9</td>
-                              <td>Liquidação</td>
-                              <td>Inicial</td>
-                              <td>10,00</td>
-                            </tr>
-                            <tr>
-                              <td>123456-78.9012.3.45.6790</td>
-                              <td>Reclamante 96</td>
-                              <td>Reclamado 9</td>
-                              <td>Contestação</td>
-                              <td>Inicial</td>
-                              <td>10,00</td>
-                            </tr>
-                            <tr>
-                              <td>123456-78.9012.3.45.6790</td>
-                              <td>Reclamante 96</td>
-                              <td>Reclamado 9</td>
-                              <td>Liquidação</td>
-                              <td>Inicial</td>
-                              <td>10,00</td>
-                            </tr>
-                            <tr>
-                              <td>123456-78.9012.3.45.6790</td>
-                              <td>Reclamante 96</td>
-                              <td>Reclamado 9</td>
-                              <td>Contestação</td>
-                              <td>Inicial</td>
-                              <td>10,00</td>
-                            </tr>
-                            <tr>
-                              <td>123456-78.9012.3.45.6790</td>
-                              <td>Reclamante 96</td>
-                              <td>Reclamado 9</td>
-                              <td>Contestação</td>
-                              <td>Inicial</td>
-                              <td>10,00</td>
+                              <td>{dataNumber}</td>
+                              <td>{dataComplain}</td>
+                              <td>{dataClaimed}</td>
+                              <td>{dataType}</td>
+                              <td>{dataServiceName}</td>
+                              <td>{dataPrice}</td>
                             </tr>
                            </tbody>
                          </table>

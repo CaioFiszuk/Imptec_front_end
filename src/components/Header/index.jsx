@@ -29,7 +29,7 @@ export function Header(){
                            <li><a href="#">Criar Cálculo</a></li>
                            <li><Link to="/bolsao-de-calculos"><strong>Bolsão de Solicitações</strong></Link></li>
                            <li><Link to="/historico-de-calculos"><strong>Histórico de Cálculos</strong></Link></li>
-                           <li><a href="#">Cálculos Pendentes</a></li>
+                           <li><Link to="/calculos-pendentes"><strong>Cálculos Pendentes</strong></Link></li>
                            <li><a href="#">Contestações Pendentes</a></li>
                            <li><Link to="/calculos-faturados"><strong>Cálculos Faturados</strong></Link></li>
                         </ul>
