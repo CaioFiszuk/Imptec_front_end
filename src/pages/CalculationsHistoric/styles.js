@@ -3,17 +3,44 @@ import styled from 'styled-components';
 export const Container = styled.div`
 > section{
     width: 95%;
-    height: 45.0rem;
+    height: 48.0rem;
     background-color: #ffffff; 
  
     margin: 5.0rem auto;
  
     border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
 
-
-
     display: flex;
     flex-direction: column;
+  }
+
+  .files{
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-left: 2.5rem;
+    margin-bottom: 0.5rem;
+
+    .excelLink{
+        color: darkcyan;
+    
+        > svg {
+            width: 2.0rem;
+            height: 2.0rem;
+        }
+      }
+
+      .pdfLink{
+        color: darkcyan;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        > svg {
+            width: 2.0rem;
+            height: 2.0rem;
+        }
+      }
   }
 
   .title{
@@ -99,42 +126,4 @@ export const Container = styled.div`
 
 }
 
-.paginationBox{
-    padding-right: 2.5rem;
-
-    align-self: flex-end;
-    margin-top: 2.0rem;
-
-    display: flex;
-    justify-content: end;
-
-    .paginator{
-        list-style: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-    
-        .pageNumber{
-            padding: 1.0rem;
-            cursor: pointer;
-            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
-            color: ${({theme})=>theme.COLORS.CONTENT};
-        }
-    
-        .previousPage{
-            padding: 1.0rem;
-            cursor: pointer;
-            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
-            color: ${({theme})=>theme.COLORS.CONTENT};
-        }
-    
-        .nextPage{
-            padding: 1.0rem;
-            cursor: pointer;
-            border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
-            color: ${({theme})=>theme.COLORS.CONTENT};
-        }
-      }
-  }
 `;

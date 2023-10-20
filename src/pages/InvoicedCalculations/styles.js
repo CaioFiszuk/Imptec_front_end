@@ -91,6 +91,7 @@ export const Container = styled.div`
 
             .link{
               cursor: pointer;
+              color: darkcyan;
           }
         }
     }

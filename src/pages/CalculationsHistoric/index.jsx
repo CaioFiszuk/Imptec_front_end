@@ -1,13 +1,75 @@
+import axios from 'axios';
+import { CSVLink } from 'react-csv';
+import { useReactToPrint } from "react-to-print";
+import { useState, useEffect, useRef } from 'react';
+
+//Styles
 import { Container } from './styles';
-import ReactPaginate from 'react-paginate';
 
+//Components
 import { Header } from '../../components/Header/index';
+import { Pagination } from '../../components/Pagination';
+import { Modal } from '../../components/Modal/index';
 
+//Icons
 import { TbElevator } from 'react-icons/tb';
 import { FaEye } from 'react-icons/fa';
 import { ImFileExcel, ImFilePdf } from 'react-icons/im';
 
 export function CalculationsHistoric(){
+    const [processes, setProcesses] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [query, setQuery] = useState("");
+    const [sort, setSort] = useState("ASC");
+
+    const componentPdf = useRef();
+
+    const generatePDF = useReactToPrint({
+        content: ()=>componentPdf.current,
+        documentTitle: "Historico de Calculos",
+        onAfterPrint: ()=>alert("Os dados foram salvos em PDF")
+    });
+
+    const getProcesses = async()=>{
+        const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getAll");
+
+        const data = response.data;
+
+        setProcesses(data);
+    }
+
+    //Pagination variables
+    const [pageNumber, setPageNumber] = useState(0);
+    const itemsPerPage = 5;
+    const pagesVisited = pageNumber * itemsPerPage;
+    const displayItems = processes.slice(pagesVisited, pagesVisited + itemsPerPage);
+    const pageCount = Math.ceil(processes.length / itemsPerPage);
+    const changePage = ({selected})=>{
+        setPageNumber(selected);
+    }
+
+        //Sorting function
+        function toSort(col){
+            if(sort === 'ASC'){
+             const sorted = [...processes].sort((a,b)=>
+                 a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+             );
+             setProcesses(sorted);
+             setSort("DSC");
+            }
+            if(sort === 'DSC'){
+             const sorted = [...processes].sort((a,b)=>
+                 a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
+             );
+             setProcesses(sorted);
+             setSort("ASC");
+            }
+         }
+
+    useEffect(()=>{
+        getProcesses()
+     }, []);
+
     return(
         <Container>
           <Header />
@@ -18,48 +80,67 @@ export function CalculationsHistoric(){
               </div>
 
               <div className='searchField'>
-                  <input type="search" placeholder='Pesquisar' />
-              </div>
-
-              <table className='historicTable'>
-                  <thead>
-                      <tr>
-                      <th>Prazo <TbElevator /></th>
-                      <th>Nº Processo <TbElevator /></th>
-                      <th>Reclamante <TbElevator /></th>
-                      <th>Reclamada <TbElevator /></th>
-                      <th>Solicitante <TbElevator /></th>
-                      <th>Dados <TbElevator /></th>
-                      <th>Excel <TbElevator /></th>
-                      <th>PDF <TbElevator /></th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>20/09/2023</td>
-                      <td>123456-78.9012.3.45.6790</td>
-                      <td>Nome A</td>
-                      <td>Nome B</td>
-                      <td>Nome C</td>
-                      <td><FaEye /></td>
-                      <td><ImFileExcel /></td>
-                      <td><ImFilePdf /></td>
-                    </tr>
-                  </tbody>
-              </table>
-
-              <div className='paginationBox'>
-                  <ReactPaginate
-                      breakLabel="..."
-                      nextLabel=">>"
-                      pageCount={2}
-                      previousLabel="<<"
-                      containerClassName='paginator'
-                      pageClassName='pageNumber'
-                      previousClassName='previousPage'
-                      nextClassName='nextPage'
+                  <input 
+                   type="search"
+                   placeholder='Pesquisar' 
+                   onChange={e=>setQuery(e.target.value)} 
                   />
               </div>
+
+              <div className='files'>
+                  <CSVLink data={processes} className='excelLink'><ImFileExcel /></CSVLink>
+                  <button onClick={generatePDF} className='pdfLink'><ImFilePdf /></button>
+              </div>
+
+              <div ref={componentPdf}>
+                  <table className='historicTable'>
+                      <thead>
+                          <tr>
+                          <th onClick={()=>toSort("due_date")}>Prazo <TbElevator /></th>
+                          <th onClick={()=>toSort("number")}>Nº Processo <TbElevator /></th>
+                          <th onClick={()=>toSort("complain")}>Reclamante <TbElevator /></th>
+                          <th onClick={()=>toSort("claimed")}>Reclamada <TbElevator /></th>
+                          <th>Solicitante <TbElevator /></th>
+                          <th>Dados <TbElevator /></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        {
+                            displayItems.filter(
+                                process=>process.complain.toLowerCase().includes(query)||
+                                process.claimed.toLowerCase().includes(query)||
+                                process.number.toLowerCase().includes(query)||
+                                process.due_date.toLowerCase().includes(query)
+                                ).map((process)=>(
+                                <tr key={process.id}>
+                                    <td>{process.due_date.split("-").reverse().join("/")}</td>
+                                    <td>{process.number}</td>
+                                    <td>{process.complain}</td>
+                                    <td>{process.claimed}</td>
+                                    <td>{process.peaple.name}</td>
+                                    <td onClick={()=>setOpen(!open)} className='link'><FaEye /></td>
+                                    <Modal
+                                     isOpen={open}
+                                     setOpen={setOpen}
+                                     dataNumber={process.number}
+                                     dataComplain={process.complain}
+                                     dataClaimed={process.claimed}
+                                     dataType={process.type}
+                                     dataServiceName={process.service.name}
+                                     dataPrice={process.price}
+                                     dataDueDate={process.due_date.split("-").reverse().join("/")}
+                                     dataPersonName={process.peaple.name}
+                                     dataStatus={process.status}
+                                    />
+                                </tr>
+                            ))
+                        }
+                      </tbody>
+                  </table>
+              </div>
+
+              <Pagination pageCount={pageCount} changePage={changePage}/>
+              
           </section>
         </Container>
     );
