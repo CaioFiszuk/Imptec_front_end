@@ -4,10 +4,11 @@ export function FormModal({isOpen, setOpen}){
     if(isOpen){
         return(
             <Container>
-              <div className="background" onClick={()=>setOpen(!isOpen)}>
+              <div className="background">
                  <div className="modal">
                    <div className="modalHeader">
                      <h2>Detalhe do processo</h2>
+                     <span onClick={()=>setOpen(!isOpen)}><strong>X</strong></span>
                    </div> 
                    <div className="modalBody">
                      <section>

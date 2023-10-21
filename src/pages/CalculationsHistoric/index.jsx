@@ -118,7 +118,7 @@ export function CalculationsHistoric(){
                                     <td>{process.complain}</td>
                                     <td>{process.claimed}</td>
                                     <td>{process.peaple.name}</td>
-                                    <td onClick={()=>setOpen(!open)} className='link'><FaEye /></td>
+                                    <td onClick={()=>setOpen(!open)} className='link'><FaEye/></td>
                                     <Modal
                                      isOpen={open}
                                      setOpen={setOpen}

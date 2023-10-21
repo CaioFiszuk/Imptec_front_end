@@ -26,11 +26,17 @@ export function Header(){
                         <a href="#"><strong>Opções de Cálculo <BiSolidDownArrow /></strong></a>
                         <ul className='dropdown-menu'>
                            <li><Link to="/cadastro"><strong>Cadastro de Pessoas</strong></Link></li>
-                           <li><a href="#">Criar Cálculo</a></li>
+
+                           <li><Link to="/requisicao-de-calculos"><strong>Criar Cálculo</strong></Link></li>
+
                            <li><Link to="/bolsao-de-calculos"><strong>Bolsão de Solicitações</strong></Link></li>
+
                            <li><Link to="/historico-de-calculos"><strong>Histórico de Cálculos</strong></Link></li>
+
                            <li><Link to="/calculos-pendentes"><strong>Cálculos Pendentes</strong></Link></li>
+
                            <li><a href="#">Contestações Pendentes</a></li>
+
                            <li><Link to="/calculos-faturados"><strong>Cálculos Faturados</strong></Link></li>
                         </ul>
                     </li>

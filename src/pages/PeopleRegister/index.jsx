@@ -30,7 +30,6 @@ export function PeopleRegister(){
      
     const token = localStorage.getItem("@imptec:token");
    
-    
     const payload = {
       name: name,
       document: document,

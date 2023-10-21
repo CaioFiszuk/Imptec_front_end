@@ -27,20 +27,6 @@ export const Container = styled.div`
         padding: 1.0rem 2.0rem;
         width: 23.0rem;
 
-        > svg {
-            color: #326ac4;
-
-            height: 5.5rem;
-            width: 5.5rem;
-        }
-
-        > span {
-            color: #326ac4;
-
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
         > a {
           text-decoration: none;
           display: flex;
@@ -49,22 +35,21 @@ export const Container = styled.div`
           > svg {
             color: #326ac4;
 
-            height: 6.5rem;
-            width: 6.5rem;
+            height: 5.0rem;
+            width: 5.0rem;
           }
 
-        > span {
+          > span {
             color: #326ac4;
 
-            padding-top: 0.5rem;
-            font-size: 1.8rem;
+            font-size: 2.0rem;
             font-weight: 600;
-        }
+          }
         }
     }
   }
 
-  .links {
+  .screens {
     grid-column: 2/4;
 
     display: flex;
@@ -75,24 +60,17 @@ export const Container = styled.div`
         background-color: ${({theme})=>theme.COLORS.APP_THEME};
         color: white;
         padding: 2.0rem;
-
         width: 20.0rem;
-
-        > a {
-          text-decoration: none;
           
-            > span {
-              font-size: 2.0rem;
-              color: white;
-            }
+          > span {
+            font-size: 2.0rem;
+            color: white;
+          }
 
-            > h3, p {
-              font-size: 1.5rem;
-              color: white;
-            }
-
-        }
-
+          > h3, p {
+            font-size: 1.5rem;
+            color: white;
+          }
       }
 
     .calculations {
@@ -127,8 +105,6 @@ export const Container = styled.div`
           > div {
             color: white;
 
-             > a {
-              text-decoration: none;
               > p {
                 color: white;
                 text-align: left;
@@ -136,13 +112,6 @@ export const Container = styled.div`
               }
               > h3 {
                 color: white;
-              }
-             }
-
-             > p {
-              color: white;
-              text-align: left;
-              font-size: 1.5rem;
               }
           }
         }
@@ -165,7 +134,7 @@ export const Container = styled.div`
     }
   }
 
-  .news {
+  .mostRecent {
     grid-column: 1/2;
 
     > h3 {
@@ -198,74 +167,10 @@ export const Container = styled.div`
 
   }
 
-  .agenda {
+  .todolist {
     grid-column: 3/4;
-
-    display: grid;
-    grid-template-columns: repeat(2, 24.0rem);
-    grid-template-rows: repeat(2, 11.0rem);
-
-    > div {
-        border: 1px solid ${({theme})=>theme.COLORS.BORDERS};
-        border-radius: 0.5rem;
-        display: flex;
-        gap: 5.0rem;
-        align-items: center;
-
-        padding: 1.0rem 2.0rem;
-        width: 23.0rem;
-        height: 10.0rem;
-
-        > svg {
-            color: #326ac4;
-
-            height: 5.5rem;
-            width: 5.5rem;
-          }
-
-        > div {
-          color: #326ac4;
-
-          > h3 {
-            text-align: right;
-          }
-
-          > p {
-            font-size: 2.5rem;
-            text-align:right;
-          }
-        }
-      }  
+  
   }
 
-  .graphs {
-    grid-column: 1/4;
-
-    display: flex;
-    justify-content: space-between;
-
-    > div {
-      background-color: white;
-      padding: 1.5rem;
-
-      height: 12.0rem;
-      width: 23.0rem;
-
-      > h4 {
-        color: ${({theme})=>theme.COLORS.TABLE_TITLES};
-        font-size: 1.2rem;
-      }
-
-      > h5 {
-        color: ${({theme})=>theme.COLORS.CONTENT};
-        font-size: 2.2rem;
-        font-weight: 300;
-      }
-
-      > p {
-        color: ${({theme})=>theme.COLORS.CONTENT};
-        font-size: 1.2rem;
-      }
-    }
-  }
+  
 `

@@ -7,6 +7,7 @@ import { Container } from "./styles";
 //Components
 import { Header } from '../../components/Header/index';
 import { Pagination } from '../../components/Pagination/index';
+import { UpdateForm } from '../../components/UpdateForm/index';
 
 //Icons
 import { BiSolidUser } from 'react-icons/bi';
@@ -17,6 +18,7 @@ export function Contacts(){
     const [admins, setAdmins] = useState([]);
     const [accountings, setAccountings] = useState([]);
     const [query, setQuery] = useState("");
+    const [open, setOpen] = useState(false);
     const token = localStorage.getItem("@imptec:token");
 
 
@@ -68,7 +70,6 @@ export function Contacts(){
       const lawyersPageCount = Math.ceil(lawyers.length / itemsPerPage);
       const adminsPageCount = Math.ceil(admins.length / itemsPerPage);
       const accountingsPageCount = Math.ceil(accountings.length / itemsPerPage);
-
       const changePage = ({selected})=>{
          setPageNumber(selected);
       }
@@ -138,7 +139,13 @@ export function Contacts(){
                        <td>{lawyer.email}</td>
                        <td>{lawyer.phone}</td>
                        <td>{lawyer.company}</td>
-                       <td><AiFillEdit /> <AiFillDelete onClick={()=>deletePerson(lawyer.id)}/></td>
+                       <td>
+                         <AiFillEdit onClick={()=>setOpen(!open)}/> 
+                         <AiFillDelete onClick={()=>deletePerson(lawyer.id)}/>
+                        </td>
+
+                                               
+                       <UpdateForm isOpen={open} setOpen={setOpen} theName={lawyer.name} thePhone={lawyer.phone} theEmail={lawyer.email} theCompany={lawyer.company}/>
                     </tr>
                     ))
                   )  
