@@ -5,15 +5,16 @@ import { useEffect, useState } from 'react';
 import { Container } from './styles';
 
 //Components
-import { Modal } from '../../components/Modal/index';
 import { Header } from '../../components/Header/index';
 import { Pagination } from '../../components/Pagination/index';
 
 //Icons
 import { TbElevator } from 'react-icons/tb';
 
+//Router
+import { Link } from "react-router-dom";
+
 export function PendingCalculations(){
-    const [open, setOpen] = useState(false);
     const [pendings, setPendings] = useState([]);
     const [query, setQuery] = useState("");
     const [sort, setSort] = useState("ASC");
@@ -94,9 +95,9 @@ export function PendingCalculations(){
                             pending=>pending.peaple.name.toLowerCase().includes(query)||
                             pending.due_date.toLowerCase().includes(query)||
                             pending.price.toLowerCase().includes(query)
-                            ).map((pending)=>(
-                            <tr key={pending.id}>
-                               <td onClick={()=>setOpen(!open)} className='link'>{pending.requesting}</td>
+                            ).map((pending, index)=>(
+                            <tr key={index}>
+                               <td className='link'><Link to={`/calculos-pendentes/${pending.number}`}>{pending.requesting}</Link></td>
                                <td>10/09/2023</td>
                                <td>{pending.peaple.name}</td>
                                <td>{pending.price}</td>
@@ -104,19 +105,6 @@ export function PendingCalculations(){
                                <td>{pending.status}</td>
                                <td>10/09/2023</td>
                                <td>Baixar</td>
-                               <Modal 
-                                 isOpen={open} 
-                                 setOpen={setOpen}
-                                 dataNumber={pending.number}
-                                 dataComplain={pending.complain}
-                                 dataClaimed={pending.claimed}
-                                 dataType={pending.type}
-                                 dataServiceName={pending.service.name}
-                                 dataPrice={pending.price}
-                                 dataDueDate={pending.due_date.split("-").reverse().join("/")}
-                                 dataPersonName={pending.peaple.name}
-                                 dataStatus={pending.status}
-                                />
                             </tr>
                         ))
                       }

@@ -13,18 +13,17 @@ export const Container = styled.header`
    .menu{
     display: flex;
 
-    > ul {
+    .list {
       list-style: none;
-      padding: 0;
 
       > li {
         display: inline-block;
         margin-right: 2.0rem;
         height: 5.5rem;
 
-        > a{
+        .link {
           text-decoration: none;
-          padding: 1.5rem 2.0rem;
+          padding: 2.5rem 2.0rem;
           display: block;
 
           color: ${({theme})=>theme.COLORS.TITLES};
@@ -33,7 +32,10 @@ export const Container = styled.header`
         }
 
         .firstLink{
+          text-decoration: none;
           color: ${({theme})=>theme.COLORS.APP_THEME};
+          font-size: 1.5rem;
+          padding: 2.5rem 2.0rem;
          }
       }
 
@@ -78,6 +80,8 @@ export const Container = styled.header`
     border: none;
     
     width: 12.0rem;
+    height: 6.9rem;
+    padding-top: 1.0rem;
 
     font-size: 1.5rem;
 
@@ -87,14 +91,18 @@ export const Container = styled.header`
     cursor: pointer;
    }
 
-   > a {
+  .logout {
     > svg{
       width: 2.5rem;
       height: 2.5rem;
       margin-right: 2.0rem;
       cursor: pointer;
-   }
-
+    }
   }
 
+ 
+
+  
+
+}
 `;

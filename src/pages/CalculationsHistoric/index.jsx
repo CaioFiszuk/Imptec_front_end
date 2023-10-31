@@ -9,16 +9,17 @@ import { Container } from './styles';
 //Components
 import { Header } from '../../components/Header/index';
 import { Pagination } from '../../components/Pagination';
-import { Modal } from '../../components/Modal/index';
 
 //Icons
 import { TbElevator } from 'react-icons/tb';
 import { FaEye } from 'react-icons/fa';
 import { ImFileExcel, ImFilePdf } from 'react-icons/im';
 
+//Router
+import { Link } from 'react-router-dom';
+
 export function CalculationsHistoric(){
     const [processes, setProcesses] = useState([]);
-    const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
     const [sort, setSort] = useState("ASC");
 
@@ -111,27 +112,14 @@ export function CalculationsHistoric(){
                                 process.claimed.toLowerCase().includes(query)||
                                 process.number.toLowerCase().includes(query)||
                                 process.due_date.toLowerCase().includes(query)
-                                ).map((process)=>(
-                                <tr key={process.id}>
+                                ).map((process, index)=>(
+                                <tr key={index}>
                                     <td>{process.due_date.split("-").reverse().join("/")}</td>
                                     <td>{process.number}</td>
                                     <td>{process.complain}</td>
                                     <td>{process.claimed}</td>
                                     <td>{process.peaple.name}</td>
-                                    <td onClick={()=>setOpen(!open)} className='link'><FaEye/></td>
-                                    <Modal
-                                     isOpen={open}
-                                     setOpen={setOpen}
-                                     dataNumber={process.number}
-                                     dataComplain={process.complain}
-                                     dataClaimed={process.claimed}
-                                     dataType={process.type}
-                                     dataServiceName={process.service.name}
-                                     dataPrice={process.price}
-                                     dataDueDate={process.due_date.split("-").reverse().join("/")}
-                                     dataPersonName={process.peaple.name}
-                                     dataStatus={process.status}
-                                    />
+                                    <td className='link'><Link to={`/historico-de-calculos/${process.number}`}><FaEye/></Link></td>
                                 </tr>
                             ))
                         }

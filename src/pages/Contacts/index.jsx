@@ -7,7 +7,6 @@ import { Container } from "./styles";
 //Components
 import { Header } from '../../components/Header/index';
 import { Pagination } from '../../components/Pagination/index';
-import { UpdateForm } from '../../components/UpdateForm/index';
 
 //Icons
 import { BiSolidUser } from 'react-icons/bi';
@@ -144,8 +143,7 @@ export function Contacts(){
                          <AiFillDelete onClick={()=>deletePerson(lawyer.id)}/>
                         </td>
 
-                                               
-                       <UpdateForm isOpen={open} setOpen={setOpen} theName={lawyer.name} thePhone={lawyer.phone} theEmail={lawyer.email} theCompany={lawyer.company}/>
+                                              
                     </tr>
                     ))
                   )  
