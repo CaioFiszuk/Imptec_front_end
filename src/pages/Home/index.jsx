@@ -20,6 +20,7 @@ export function Home(){
   //const [mostRecent, setMostRecent] = useState([]);
   const [stockTotal, setStockTotal] = useState("");
   const [pendingCalculations, setPendingCalculations] = useState("");
+  const [contestations, setContestations] = useState("");
    
   /*
   const getMostRecent = async ()=>{
@@ -44,13 +45,20 @@ export function Home(){
 
     const data = response.data;
     setPendingCalculations(data.length);
-}
+  }
 
+  const getContestations = async ()=>{
+    const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getByType/Contestação");
+
+    const data = response.data;
+    setContestations(data.length);
+  }
 
   useEffect(()=>{
     //getMostRecent()
     getStocks()
     getPendingsCalculations()
+    getContestations()
  }, []);
 
     return(
@@ -119,7 +127,7 @@ export function Home(){
                 <ImHammer2 />
                 <div>
                     <h3>Contestações</h3>
-                    <p>13</p>
+                    <p>{contestations}</p>
                 </div>
               </div>
             </div>

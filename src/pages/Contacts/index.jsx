@@ -12,12 +12,14 @@ import { Pagination } from '../../components/Pagination/index';
 import { BiSolidUser } from 'react-icons/bi';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
+//Router
+import { Link } from 'react-router-dom';
+
 export function Contacts(){
     const [lawyers, setLawyers] = useState([]);
     const [admins, setAdmins] = useState([]);
     const [accountings, setAccountings] = useState([]);
     const [query, setQuery] = useState("");
-    const [open, setOpen] = useState(false);
     const token = localStorage.getItem("@imptec:token");
 
 
@@ -132,14 +134,14 @@ export function Contacts(){
                 {(
                   displayLawyers.filter(
                     lawyer=>lawyer.name.toLowerCase().includes(query)
-                    ).map((lawyer)=>(
-                    <tr key={lawyer.id}>
+                    ).map((lawyer, index)=>(
+                    <tr key={index}>
                        <td>{lawyer.name}</td>
                        <td>{lawyer.email}</td>
                        <td>{lawyer.phone}</td>
                        <td>{lawyer.company}</td>
                        <td>
-                         <AiFillEdit onClick={()=>setOpen(!open)}/> 
+                         <Link to={`/atualizar-contato/${lawyer.id}`}><AiFillEdit/></Link>
                          <AiFillDelete onClick={()=>deletePerson(lawyer.id)}/>
                         </td>
 

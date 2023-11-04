@@ -119,7 +119,7 @@ export function CalculationsHistoric(){
                                     <td>{process.complain}</td>
                                     <td>{process.claimed}</td>
                                     <td>{process.peaple.name}</td>
-                                    <td className='link'><Link to={`/historico-de-calculos/${process.number}`}><FaEye/></Link></td>
+                                    <td className='link'><Link to={`/calculos-pendentes/${process.number}`}><FaEye/></Link></td>
                                 </tr>
                             ))
                         }

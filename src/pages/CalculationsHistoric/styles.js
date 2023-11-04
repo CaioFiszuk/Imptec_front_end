@@ -117,8 +117,10 @@ export const Container = styled.div`
             } 
 
             .link{
-                color: darkcyan;
-                cursor: pointer;
+                > a {
+                    color: darkcyan;
+                    cursor: pointer;
+                }
             }
         }
     } 

@@ -35,7 +35,7 @@ export function Header(){
 
                            <li><Link to="/calculos-pendentes" className='link'><strong>Cálculos Pendentes</strong></Link></li>
 
-                           <li><a href="#" className='link'>Contestações Pendentes</a></li>
+                           <li><Link to="/contestacoes-pendentes" className='link'><strong>Contestações Pendentes</strong></Link></li>
 
                            <li><Link to="/calculos-faturados" className='link'><strong>Cálculos Faturados</strong></Link></li>
                         </ul>

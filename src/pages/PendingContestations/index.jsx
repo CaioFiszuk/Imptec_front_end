@@ -14,25 +14,25 @@ import { TbElevator } from 'react-icons/tb';
 //Router
 import { Link } from "react-router-dom";
 
-export function InvoicedCalculations(){
-    const [invoices, setInvoices] = useState([]);
+export function PendingContestations(){
+    const [pendings, setPendings] = useState([]);
     const [query, setQuery] = useState("");
     const [sort, setSort] = useState("ASC");
 
-    const getInvoices = async ()=>{
-        const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getByStatus/Faturado");
+    const getPendings = async ()=>{
+        const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getByType/Contestação");
 
         const data = response.data;
 
-        setInvoices(data);
+        setPendings(data);
     }
 
     //Pagination variables
     const [pageNumber, setPageNumber] = useState(0);
     const itemsPerPage = 5;
     const pagesVisited = pageNumber * itemsPerPage;
-    const displayItems = invoices.slice(pagesVisited, pagesVisited + itemsPerPage);
-    const pageCount = Math.ceil(invoices.length / itemsPerPage);
+    const displayItems = pendings.slice(pagesVisited, pagesVisited + itemsPerPage);
+    const pageCount = Math.ceil(pendings.length / itemsPerPage);
     const changePage = ({selected})=>{
        setPageNumber(selected);
     }
@@ -40,23 +40,23 @@ export function InvoicedCalculations(){
     //Sorting function
     function toSort(col){
         if(sort === 'ASC'){
-         const sorted = [...invoices].sort((a,b)=>
+         const sorted = [...pendings].sort((a,b)=>
              a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
          );
-         setInvoices(sorted);
+         setPendings(sorted);
          setSort("DSC");
         }
         if(sort === 'DSC'){
-         const sorted = [...invoices].sort((a,b)=>
+         const sorted = [...pendings].sort((a,b)=>
              a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
          );
-         setInvoices(sorted);
+         setPendings(sorted);
          setSort("ASC");
         }
      }
 
     useEffect(()=>{
-       getInvoices()
+       getPendings()
     }, []);
 
     return(
@@ -65,7 +65,7 @@ export function InvoicedCalculations(){
 
             <section>
                 <div className='title'>
-                    <h2>Cálculos Fatutados</h2>
+                    <h2>Contestações Pendentes</h2>
                 </div>
 
                 <div className='searchField'>
@@ -92,17 +92,17 @@ export function InvoicedCalculations(){
                     <tbody>
                       {
                         displayItems.filter(
-                            invoice=>invoice.peaple.name.toLowerCase().includes(query)||
-                            invoice.due_date.toLowerCase().includes(query)||
-                            invoice.price.toLowerCase().includes(query)
-                            ).map((invoice, index)=>(
+                            pending=>pending.peaple.name.toLowerCase().includes(query)||
+                            pending.due_date.toLowerCase().includes(query)||
+                            pending.price.toLowerCase().includes(query)
+                            ).map((pending, index)=>(
                             <tr key={index}>
-                               <td className='link'><Link to={`/processo/${invoice.number}`}>{invoice.requesting}</Link></td>
+                               <td className='link'><Link to={`/processo/${pending.number}`}>{pending.requesting}</Link></td>
                                <td>10/09/2023</td>
-                               <td>{invoice.peaple.name}</td>
-                               <td>{invoice.price}</td>
-                               <td>{invoice.due_date.split("-").reverse().join("/")}</td>
-                               <td>{invoice.status}</td>
+                               <td>{pending.peaple.name}</td>
+                               <td>{pending.price}</td>
+                               <td>{pending.due_date.split("-").reverse().join("/")}</td>
+                               <td>{pending.status}</td>
                                <td>10/09/2023</td>
                                <td>Baixar</td>
                             </tr>

@@ -65,7 +65,7 @@ export function PendingCalculations(){
 
             <section>
                 <div className='title'>
-                    <h2>Processos Fatutados</h2>
+                    <h2>Cálculos Pendentes</h2>
                 </div>
 
                 <div className='searchField'>
@@ -97,7 +97,7 @@ export function PendingCalculations(){
                             pending.price.toLowerCase().includes(query)
                             ).map((pending, index)=>(
                             <tr key={index}>
-                               <td className='link'><Link to={`/calculos-pendentes/${pending.number}`}>{pending.requesting}</Link></td>
+                               <td className='link'><Link to={`/processo/${pending.number}`}>{pending.requesting}</Link></td>
                                <td>10/09/2023</td>
                                <td>{pending.peaple.name}</td>
                                <td>{pending.price}</td>
