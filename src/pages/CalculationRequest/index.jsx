@@ -1,10 +1,54 @@
 import { Container, Form, Button } from './styles';
 
+import { useState } from 'react';
+import axios from 'axios';
+
 import { Header } from '../../components/Header/index';
 
 import { BiSolidUpArrow } from 'react-icons/bi';
 
 export function CalculationRequest(){
+   const [number, setNumber] = useState("");
+   const [type, setType] = useState("");
+   const [service, setService] = useState("");
+   const [dueDate, setDueDate] = useState("");
+   const [requesting, setRequesting] = useState("");
+   const [complain, setComplain] = useState("");
+   const [claimed, setClaimed] = useState("");
+   const [notes, setNotes] = useState("");
+   const [response, setResponse] = useState("");
+
+   async function createProcess(){
+    const token = localStorage.getItem("@imptec:token");
+   
+    const payload = {
+      number: number,
+      type: type,
+      service_id: service,
+      due_date: dueDate,
+      requesting: requesting,
+      complain: complain,
+      claimed: claimed,
+      notes: notes
+    };
+    
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json'
+    };
+
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/api/process/create", payload, { headers });
+      setResponse(res.data);
+
+      console.log(response);
+    } catch (error) {
+      alert(error);
+    }
+   }
+
+
     return(
         <Container>
           <Header />
@@ -19,11 +63,17 @@ export function CalculationRequest(){
                <fieldset>
                   <div className='field'>
                     <label>Nº do Processo</label>
-                    <input type="text" />
+                    <input 
+                    type="text"
+                    onChange={e => setNumber(e.target.value)} 
+                    />
                   </div>
                   <div className='field'>
                     <label>Tipo de Solicitação</label>
-                    <select>
+                    <select
+                      onChange={e => setType(e.target.value)}
+                      value={type}
+                    >
                       <option value="">Selecione</option>
                       <option value="Liquidação">Liquidação</option>
                       <option value="Contestação">Contestação</option>
@@ -31,7 +81,10 @@ export function CalculationRequest(){
                   </div>
                   <div className='field'>
                     <label>Tipo de Trabalho</label>
-                    <select>
+                    <select
+                      onChange={e => setService(e.target.value)}
+                      value={service}
+                    >
                       <option value="">Selecione</option>
                       <option value="1">Inicial</option>
                       <option value="2">Sentença</option>
@@ -48,31 +101,37 @@ export function CalculationRequest(){
                   </div>
                   <div className='field'>
                     <label>Prazo de Entrega</label>
-                    <input type="date" />
+                    <input 
+                    type="date"
+                    onChange={e => setDueDate(e.target.value)} 
+                    />
                   </div>
                   <div className='field'>
                     <label>Solicitante</label>
-                    <select>
-                     <option value="">Selecione</option>
-                     <option value="4">Advogado 1</option>
-                     <option value="6">Advogado 2</option>
-                     <option value="8">Advogado 4</option>
-                     <option value="9">Advogado 5</option>
-                    </select>
+                    <input 
+                    type="text" 
+                    onChange={e => setRequesting(e.target.value)}
+                    />
                   </div>
                   <div className='field'>
                     <label>Reclamante</label>
-                    <input type="text" />
+                    <input 
+                    type="text" 
+                    onChange={e => setComplain(e.target.value)}
+                    />
                   </div>
                   <div className='field'>
                     <label>Reclamada</label>
-                    <input type="text" />
+                    <input 
+                    type="text" 
+                    onChange={e => setClaimed(e.target.value)}
+                    />
                   </div>
                </fieldset>
 
                <div className='textarea'>
                     <label>Observações</label>
-                    <textarea></textarea>
+                    <textarea onChange={e => setNotes(e.target.value)}></textarea>
                </div>
 
                <div className='file'>
@@ -80,7 +139,7 @@ export function CalculationRequest(){
                     <input type="file"/>
               </div>
 
-               <Button>Solicitar [C/L]</Button>
+               <Button onClick={()=>createProcess()}>Solicitar [C/L]</Button>
 
             </Form>
         </Container>

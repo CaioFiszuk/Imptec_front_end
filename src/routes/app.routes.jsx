@@ -10,22 +10,35 @@ import { InvoicedCalculations } from '../pages/InvoicedCalculations/index';
 import { PeopleRegister } from '../pages/PeopleRegister/index';
 import { CalculationsHistoric } from '../pages/CalculationsHistoric/index';
 import { Contacts } from '../pages/Contacts/index';
-import { UpdateContact } from '../pages/UpdateContact';
+import { UpdateContact } from '../pages/UpdateContact/index';
+import { UpdateCalculations } from '../pages/UpdateCalculations/index';
 
 export function AppRoutes(){
     return(
         <Routes>
             <Route path='/' element={<Home />}/>
+
             <Route path='/requisicao-de-calculos' element={<CalculationRequest />}/>
+
             <Route path='/bolsao-de-calculos' element={<CalculationStock />}/>
+
             <Route path='/calculos-pendentes' element={<PendingCalculations />}/>
+
             <Route path='/contestacoes-pendentes' element={<PendingContestations />}/>
+
             <Route path='/processo/:number' element={<Details />}/>
+
             <Route path='/calculos-faturados' element={<InvoicedCalculations />}/>
+
             <Route path='/cadastro' element={<PeopleRegister />}/>
+
             <Route path='/historico-de-calculos' element={<CalculationsHistoric />} />
+
             <Route path='/contatos' element={<Contacts />}/>
+            
             <Route path='/atualizar-contato/:id' element={<UpdateContact />}/>
+
+            <Route path='/atualizar-processo/:number' element={<UpdateCalculations />}/>
         </Routes>
     );
 }

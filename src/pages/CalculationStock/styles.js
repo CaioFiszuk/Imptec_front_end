@@ -90,8 +90,11 @@ export const Container = styled.div`
             } 
 
             .link{
+              > a{
                 color: darkcyan;
                 cursor: pointer;
+                text-decoration: none;
+              }
             }
         }
     } 

@@ -16,9 +16,7 @@ export const Container = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    
     width: 90%;
-
   }
 
   .modalHeader{
@@ -52,7 +50,7 @@ export const Container = styled.div`
     padding-top: 2.0rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    padding-bottom: 4.5rem;
+    padding-bottom: 2.5rem;
 
     display: flex;
     gap: 2.0rem;
@@ -87,10 +85,9 @@ color: white;
 border: none;
 border-radius: 0.5rem;
 padding: 1.0rem;
-
 font-size: 1.6rem;
-
-align-self: self-end;
+margin-bottom: 2.0rem;
+margin-left: 100.0rem;
 
 cursor: pointer;
 

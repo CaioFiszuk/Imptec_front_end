@@ -7,13 +7,14 @@ import { Container } from './styles';
 //Icons
 import { TbElevator } from 'react-icons/tb';
 
+//Router
+import { Link } from 'react-router-dom';
+
 //Components
 import { Header } from '../../components/Header/index';
-import { FormModal } from '../../components/FormModal/index';
 import { Pagination } from '../../components/Pagination';
 
 export function CalculationStock(){
-  const [open, setOpen] = useState(false);
   const [stocks, setStocks] = useState([]);
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("ASC");
@@ -95,8 +96,8 @@ export function CalculationStock(){
                           stock.status.toLowerCase().includes(query)
                           ).map((stock)=>(
                           <tr key={stock.id}>
-                            <td>{stock.due_date}</td>
-                            <td onClick={()=>setOpen(!open)} className='link'>{stock.number}</td>
+                            <td>{stock.due_date.split("-").reverse().join("/")}</td>
+                            <td className='link'><Link to={`/atualizar-processo/${stock.number}`}>{stock.number}</Link></td>
                             <td>{stock.type}</td>
                             <td>{stock.service.name}</td>
                             <td>{stock.peaple.name}</td>
@@ -113,10 +114,6 @@ export function CalculationStock(){
                <Pagination pageCount={pageCount} changePage={changePage}/>
             </section>
 
-            <FormModal 
-            isOpen={open} 
-            setOpen={setOpen}
-            />
         </Container>
     );
 }
