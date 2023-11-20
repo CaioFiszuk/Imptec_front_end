@@ -19,6 +19,21 @@ export function UpdateCalculations(){
 
     const navigate = useNavigate();
 
+    const getProcess = async ()=>{
+
+      try
+      {
+        const response = await axios.get(`https://exato.m2fsolucoes.com/api/process/getByProcess/${number}`);
+
+        const data = response.data;
+  
+        setProcess(data);
+
+      }catch(error){
+        console.log(error);
+      }
+  }
+
     const handleUpdate = async ()=>{
       const token = localStorage.getItem("@imptec:token");
 
@@ -52,21 +67,6 @@ export function UpdateCalculations(){
       }
 
     }
-
-    const getProcess = async ()=>{
-
-        try
-        {
-          const response = await axios.get(`https://exato.m2fsolucoes.com/api/process/getByProcess/${number}`);
-  
-          const data = response.data;
-    
-          setProcess(data);
-  
-        }catch(error){
-          console.log(error);
-        }
-    }
  
     useEffect(()=>{
        getProcess()
@@ -86,14 +86,13 @@ export function UpdateCalculations(){
                   process.map((pro, index)=>(
                     <section key={index}>
                     <fieldset>
-                       <input type="hidden" value={pro.id} onChange={e => setId(e.target.value)}/>
-
                         <div className='field'>
                             <label>Nº do Processo</label>
                             <input 
                             type="text" 
                             onChange={e => setNumberProcess(e.target.value)}
                             />
+                            
                         </div>
                         <div className='field'>
                             <label>Tipo de Solicitação</label>

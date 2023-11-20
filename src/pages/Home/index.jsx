@@ -17,21 +17,21 @@ import { AiFillWarning } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 export function Home(){
-  //const [mostRecent, setMostRecent] = useState([]);
+  const [mostRecent, setMostRecent] = useState([]);
   const [stockTotal, setStockTotal] = useState("");
   const [pendingCalculations, setPendingCalculations] = useState("");
   const [contestations, setContestations] = useState("");
    
-  /*
+  
   const getMostRecent = async ()=>{
-    const response = await axios.get("https://exato.m2fsolucoes.com/api/process/lasts");
+    const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getByLast");
 
     const data = response.data;
 
     console.log(data);
 
     setMostRecent(data);
-  }*/
+  }
 
   const getStocks = async ()=>{
     const response = await axios.get("https://exato.m2fsolucoes.com/api/process/getAll");
@@ -55,7 +55,7 @@ export function Home(){
   }
 
   useEffect(()=>{
-    //getMostRecent()
+    getMostRecent()
     getStocks()
     getPendingsCalculations()
     getContestations()
@@ -135,19 +135,14 @@ export function Home(){
         
         <div className="mostRecent">
             <h3>O que há de novo?</h3>
-            <ul>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. </li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            </ul>
+                {
+                  mostRecent.map((recent, index)=>(
+                    <ul key={index}>
+                      <li>{recent.number}</li>
+                    </ul>
+                  ))
+                }
         </div>   
-
-        <div className="todolist">
-            <h2>To-do List</h2>
-        </div>   
-
     </main>
 
      </Container>

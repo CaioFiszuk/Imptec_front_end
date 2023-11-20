@@ -144,8 +144,7 @@ export function Contacts(){
                          <Link to={`/atualizar-contato/${lawyer.id}`}><AiFillEdit/></Link>
                          <AiFillDelete onClick={()=>deletePerson(lawyer.id)}/>
                         </td>
-
-                                              
+                
                     </tr>
                     ))
                   )  
@@ -176,7 +175,11 @@ export function Contacts(){
                        <td>{admin.email}</td>
                        <td>{admin.phone}</td>
                        <td>{admin.company}</td>
-                       <td><AiFillEdit /> <AiFillDelete /></td>
+                       <td>
+                       <Link to={`/atualizar-contato/${admin.id}`}><AiFillEdit/></Link>
+                        
+                       <AiFillDelete onClick={()=>deletePerson(admin.id)}/>
+                       </td>
                     </tr>
                     ))
                   )  
@@ -207,7 +210,11 @@ export function Contacts(){
                        <td>{accounting.email}</td>
                        <td>{accounting.phone}</td>
                        <td>{accounting.company}</td>
-                       <td><AiFillEdit /> <AiFillDelete /></td>
+                       <td>
+                       <Link to={`/atualizar-contato/${accounting.id}`}><AiFillEdit/></Link>
+
+                       <AiFillDelete onClick={()=>deletePerson(accounting.id)}/>
+                        </td>
                     </tr>
                     ))
                   )  

@@ -16,7 +16,6 @@ export function CalculationRequest(){
    const [complain, setComplain] = useState("");
    const [claimed, setClaimed] = useState("");
    const [notes, setNotes] = useState("");
-   const [response, setResponse] = useState("");
 
    async function createProcess(){
     const token = localStorage.getItem("@imptec:token");
@@ -40,9 +39,8 @@ export function CalculationRequest(){
 
     try {
       const res = await axios.post("http://127.0.0.1:8000/api/process/create", payload, { headers });
-      setResponse(res.data);
 
-      console.log(response);
+      console.log(res.data);
     } catch (error) {
       alert(error);
     }

@@ -10,7 +10,7 @@ export function UpdateContact(){
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [company, setCompany] = useState("");
-    //const [person, setPerson] = useState("");
+    const [person, setPerson] = useState("");
 
     const handleUpdate = async()=>{
       const token = localStorage.getItem("@imptec:token");
@@ -30,9 +30,9 @@ export function UpdateContact(){
       };
 
       try {
-        /*const res =*/ await axios.post("https://exato.m2fsolucoes.com/api/peaple/update", payload, { headers });
+        await axios.post("https://exato.m2fsolucoes.com/api/peaple/update", payload, { headers });
 
-        //console.log(res.data);
+        navigate(-1);
 
       } catch (error) {
         alert(error);
@@ -54,10 +54,9 @@ export function UpdateContact(){
 
       try
       {
-        /*const response = */await axios.post("https://exato.m2fsolucoes.com/api/peaple/getById", payload, { headers });
+       const response = await axios.post("https://exato.m2fsolucoes.com/api/peaple/getById", payload, { headers });
+       setPerson(response.data);
 
-        //const data = response.data;
-        //setPerson(data);
       } catch (error) {
         console.log(error)
       }
@@ -81,8 +80,9 @@ export function UpdateContact(){
              <div className='field'>
                <label>Nome</label>
                <input 
-                type="text"
-                onChange={e => setName(e.target.value)}
+                  type="text" 
+                  value={person.name ?? ''} 
+                  onChange={(e) => setName(e.target.value)}
                />
              </div>
 
@@ -90,7 +90,8 @@ export function UpdateContact(){
               <label>E-mail</label>
               <input 
               type="text"
-              onChange={e => setEmail(e.target.value)}  
+  
+              onChange={e => setEmail(e.target.value)} 
               />
              </div>
 
@@ -98,6 +99,7 @@ export function UpdateContact(){
               <label>Telefone</label>
               <input 
               type="text"
+
               onChange={e => setPhone(e.target.value)}  
               />
              </div>
@@ -105,7 +107,8 @@ export function UpdateContact(){
              <div className='field'>
               <label>Empresa</label>
               <input 
-              type="text" 
+              type="text"
+
               onChange={e => setCompany(e.target.value)} 
               />
              </div>

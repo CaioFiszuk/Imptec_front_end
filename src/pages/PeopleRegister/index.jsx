@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 //Styles
 import { Container, Form, Button } from './styles';
@@ -9,6 +10,9 @@ import { Header } from '../../components/Header/index';
 
 //Icons
 import { BiSolidUpArrow } from 'react-icons/bi';
+
+//Router
+import { useNavigate } from 'react-router-dom';
 
 export function PeopleRegister(){
    const [name, setName] = useState("");
@@ -23,8 +27,8 @@ export function PeopleRegister(){
    const [phone, setPhone] = useState("");
    const [email, setEmail] = useState("");
    const [company, setCompany] = useState("");
-   const [response, setResponse] = useState("");
 
+   const navigate = useNavigate();
    
    async function handleRegister(){
      
@@ -50,15 +54,33 @@ export function PeopleRegister(){
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json'
     };
-  
    
     try {
-      const res = await axios.post("https://exato.m2fsolucoes.com/api/peaple/create", payload, { headers });
-      setResponse(res.data);
+      await axios.post("https://exato.m2fsolucoes.com/api/peaple/create", payload, { headers });
 
-      console.log(response);
+      if(name === '' || document === '' || type === '' || address === '' || complement === '' || neighborhood === '' || zipCode === '' || city === '' || uf === '' || phone === '' || company === '' || email === ''){
+        Swal.fire({
+          title: "Por favor, preencha todos os campos",
+          icon: "warning",
+          confirmButtonText: "Ok"
+        });
+      }
+
+      Swal.fire({
+        title: "Success",
+        icon: "success",
+        timerProgressBar: true,
+        confirmButtonText: "Ok"
+      });
+
+      navigate(-1);
+
     } catch (error) {
-      alert(error);
+      Swal.fire({
+        title: "Error",
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
     }
     
   }
