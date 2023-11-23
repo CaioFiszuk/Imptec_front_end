@@ -1,10 +1,13 @@
-import { Container, Form, Button } from './styles';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+//Styles
+import { Container, Form, Button } from './styles';
+
+//Components
 import { Header } from '../../components/Header/index';
 
+//Icons
 import { BiSolidUpArrow } from 'react-icons/bi';
 
 export function CalculationRequest(){
@@ -16,6 +19,7 @@ export function CalculationRequest(){
    const [complain, setComplain] = useState("");
    const [claimed, setClaimed] = useState("");
    const [notes, setNotes] = useState("");
+   const [lawyers, setLawyers] = useState([]);
 
    async function createProcess(){
     const token = localStorage.getItem("@imptec:token");
@@ -38,7 +42,7 @@ export function CalculationRequest(){
     };
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/process/create", payload, { headers });
+      const res = await axios.post("https://exato.m2fsolucoes.com/api/process/create", payload, { headers });
 
       console.log(res.data);
     } catch (error) {
@@ -46,6 +50,17 @@ export function CalculationRequest(){
     }
    }
 
+    const getLawyers =  async ()=>{
+      const response = await axios.get("https://exato.m2fsolucoes.com/api/peaple/getAll/ADV");
+
+      const data = response.data;
+  
+      setLawyers(data);
+    }
+
+    useEffect(()=>{
+      getLawyers()
+    }, []);
 
     return(
         <Container>
@@ -66,6 +81,7 @@ export function CalculationRequest(){
                     onChange={e => setNumber(e.target.value)} 
                     />
                   </div>
+
                   <div className='field'>
                     <label>Tipo de Solicitação</label>
                     <select
@@ -77,6 +93,7 @@ export function CalculationRequest(){
                       <option value="Contestação">Contestação</option>
                     </select>
                   </div>
+
                   <div className='field'>
                     <label>Tipo de Trabalho</label>
                     <select
@@ -97,6 +114,7 @@ export function CalculationRequest(){
                       <option value="13">Descriminização de Verbas</option>
                     </select>
                   </div>
+
                   <div className='field'>
                     <label>Prazo de Entrega</label>
                     <input 
@@ -104,13 +122,22 @@ export function CalculationRequest(){
                     onChange={e => setDueDate(e.target.value)} 
                     />
                   </div>
+
                   <div className='field'>
                     <label>Solicitante</label>
-                    <input 
-                    type="text" 
-                    onChange={e => setRequesting(e.target.value)}
-                    />
+                    <select
+                      onChange={e => setRequesting(e.target.value)}
+                      value={requesting}
+                    >
+                        <option value="">Selecione</option>
+                        {
+                            lawyers.map((lawyer, index)=>(
+                                <option key={index} value={lawyer.id}>{lawyer.name}</option>
+                            ))
+                        }
+                    </select>
                   </div>
+
                   <div className='field'>
                     <label>Reclamante</label>
                     <input 
@@ -118,6 +145,7 @@ export function CalculationRequest(){
                     onChange={e => setComplain(e.target.value)}
                     />
                   </div>
+
                   <div className='field'>
                     <label>Reclamada</label>
                     <input 

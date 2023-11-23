@@ -148,18 +148,22 @@ export const Container = styled.div`
       list-style: none;
       
       > li {
-        color: ${({theme})=>theme.COLORS.CONTENT};
         font-size: 1.5rem;
         border-top: 1px solid ${({theme})=>theme.COLORS.BORDERS};
         border-bottom: 1px solid ${({theme})=>theme.COLORS.BORDERS};
         padding-bottom: 1.0rem;
 
-        &::before{
+        &::before {
           content:'\\2022 ';
           color: ${({theme})=>theme.COLORS.APP_THEME};
           font-weight: bold;
           font-size: 3.0rem;
-          padding-right: 4.0rem;
+          padding-right: 3.0rem;
+        }
+
+        > a {
+          text-decoration: none;
+          color: ${({theme})=>theme.COLORS.CONTENT};
         }
       }
     }

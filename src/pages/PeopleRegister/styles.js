@@ -79,7 +79,7 @@ export const Form = styled.div`
     width: 15.0rem;
   }
   .sizeTwo{
-    width: 35.8rem;
+    width: 35.3rem;
   }
   .sizeThree{
     width: 40.0rem;

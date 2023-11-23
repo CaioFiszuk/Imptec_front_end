@@ -35,6 +35,8 @@ export function Contacts(){
          };
 
           await axios.post(`https://exato.m2fsolucoes.com/api/peaple/delete/`, payload, {headers});
+
+          window.location.reload();
        }
 
       const getLawyers = async ()=>{

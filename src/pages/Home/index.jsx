@@ -8,8 +8,7 @@ import { Container } from './styles';
 import { Header } from '../../components/Header/index';
 
 //Icons
-import { BiSolidCalculator } from 'react-icons/bi';
-import { BsGraphUpArrow, BsClockFill,BsFillEnvelopeFill, BsTable } from 'react-icons/bs';
+import { BsGraphUpArrow, BsClockFill,BsFillEnvelopeFill, BsTable, BsFillCalculatorFill } from 'react-icons/bs';
 import { ImHammer2 } from 'react-icons/im';
 import { AiFillWarning } from 'react-icons/ai';
 
@@ -68,7 +67,7 @@ export function Home(){
         <div className="actions">
             <div>
               <Link to="/requisicao-de-calculos">
-                <BiSolidCalculator />
+                <BsFillCalculatorFill />
                 <span>Solicitar Cálculos</span>
               </Link>
             </div>
@@ -138,11 +137,12 @@ export function Home(){
                 {
                   mostRecent.map((recent, index)=>(
                     <ul key={index}>
-                      <li>{recent.number}</li>
+                      <li><Link to={`/processo/${recent.number}`}>{recent.number}</Link></li>
                     </ul>
                   ))
                 }
         </div>   
+
     </main>
 
      </Container>
