@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 //Styles
 import { Container, Form, Button } from './styles';
@@ -10,6 +11,9 @@ import { Header } from '../../components/Header/index';
 //Icons
 import { BiSolidUpArrow } from 'react-icons/bi';
 
+//Router
+import { useNavigate } from 'react-router-dom';
+
 export function CalculationRequest(){
    const [number, setNumber] = useState("");
    const [type, setType] = useState("");
@@ -19,9 +23,12 @@ export function CalculationRequest(){
    const [complain, setComplain] = useState("");
    const [claimed, setClaimed] = useState("");
    const [notes, setNotes] = useState("");
+   const [file, setFile] = useState("");
    const [lawyers, setLawyers] = useState([]);
+   const navigate = useNavigate();
 
    async function createProcess(){
+    console.log('teste')
     const token = localStorage.getItem("@imptec:token");
    
     const payload = {
@@ -32,21 +39,42 @@ export function CalculationRequest(){
       requesting: requesting,
       complain: complain,
       claimed: claimed,
-      notes: notes
+      notes: notes,
+      file: file
     };
     
     const headers = {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      
     };
 
     try {
-      const res = await axios.post("https://exato.m2fsolucoes.com/api/process/create", payload, { headers });
+      if(number === '' || type === '' || service === '' || dueDate === '' || requesting === '' || complain === '' || claimed === '' || notes === ''){
+        Swal.fire({
+          title: "Por favor, preencha todos os campos",
+          icon: "warning",
+          confirmButtonText: "Ok",
+        });
+      }else{
+        await axios.post("https://exato.m2fsolucoes.com/api/process/create", payload, { headers });
 
-      console.log(res.data);
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          timerProgressBar: true,
+          confirmButtonText: "Ok"
+        });
+
+        navigate(-1);
+      }
+
     } catch (error) {
-      alert(error);
+      Swal.fire({
+        title: "Error",
+        icon: "error",
+        confirmButtonText: "Ok"
+      });
     }
    }
 
@@ -66,7 +94,7 @@ export function CalculationRequest(){
         <Container>
           <Header />
            
-            <Form>
+            <Form encType='multipart/form-data'>
               <div className='formTitle'>
                  <h2>Solicitar [Contestação] [Liquidação]</h2>
                   
@@ -162,10 +190,11 @@ export function CalculationRequest(){
 
                <div className='file'>
                     <label>Anexar Arquivo(s) do Processo</label>
-                    <input type="file"/>
+                    <input type="file"
+                    onChange={e => setFile(e.target.value)}/>
               </div>
 
-               <Button onClick={()=>createProcess()}>Solicitar [C/L]</Button>
+               <Button type='button' onClick={createProcess}>Solicitar [C/L]</Button>
 
             </Form>
         </Container>

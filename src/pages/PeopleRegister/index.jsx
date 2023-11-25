@@ -30,7 +30,8 @@ export function PeopleRegister(){
 
    const navigate = useNavigate();
    
-   async function handleRegister(){
+   async function handleRegister(e){
+    e.preventDefault();
      
     const token = localStorage.getItem("@imptec:token");
    
@@ -56,24 +57,24 @@ export function PeopleRegister(){
     };
    
     try {
-      await axios.post("https://exato.m2fsolucoes.com/api/peaple/create", payload, { headers });
-
       if(name === '' || document === '' || type === '' || address === '' || complement === '' || neighborhood === '' || zipCode === '' || city === '' || uf === '' || phone === '' || company === '' || email === ''){
         Swal.fire({
           title: "Por favor, preencha todos os campos",
           icon: "warning",
+          confirmButtonText: "Ok",
+        });
+      }else{
+        await axios.post("https://exato.m2fsolucoes.com/api/peaple/create", payload, { headers });
+
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          timerProgressBar: true,
           confirmButtonText: "Ok"
         });
+  
+        navigate(-1);
       }
-
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        timerProgressBar: true,
-        confirmButtonText: "Ok"
-      });
-
-      navigate(-1);
 
     } catch (error) {
       Swal.fire({
@@ -212,7 +213,6 @@ export function PeopleRegister(){
               </fieldset>
 
               <Button 
-              type='button'
               onClick={handleRegister}
               >Solicitar [C/L]</Button>
 
