@@ -105,13 +105,31 @@ export const Form = styled.form`
 
       margin-left: 2.8rem;
     }
-
-    > input {
-      margin-left: 1.0rem;
-      color: gray;
-      font-size: 1.5rem;
-    }
   }
+
+  .fileContainer{
+    border: 1px dotted black;
+    background-color: ${({theme})=>theme.COLORS.TITLES};
+    padding-left: 1.0rem;
+    margin-top: 0.5rem; 
+    font-size: 1.2rem;
+  }
+
+  .fileList{
+    display: flex;
+    gap: 0.5rem;
+ }
+
+ .fileItens{
+    background-color: ${({theme})=>theme.COLORS.BORDERS};
+    color: black;
+    width: 8.0rem;
+    height: 7.0rem;
+    list-style: none;
+
+    margin-top: 0.5rem;
+    text-align: center;
+ }
 `;
 
 export const Button = styled.button`

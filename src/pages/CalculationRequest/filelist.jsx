@@ -23,25 +23,17 @@ export function CalculationRequest(){
    const [complain, setComplain] = useState("");
    const [claimed, setClaimed] = useState("");
    const [notes, setNotes] = useState("");
-   const [uploadedFiles, setUploadedFiles] = useState([]);
+   const [file, setFile] = useState("");
    const [lawyers, setLawyers] = useState([]);
    const navigate = useNavigate();
 
-   const handleFiles = files => {
-    const uploaded = [...uploadedFiles];
-
-    files.some((file)=>{
-      if(uploaded.findIndex((f)=>f.name === file.name) === -1){
-        uploaded.push(file);
-      }
-    });
-
-    setUploadedFiles(uploaded);
+   function handleDragOver(e){
+    e.preventDefault();
   }
 
-  const handleFileEvent = (e) => {
-    const chosenFiles = Array.prototype.slice.call(e.target.files);
-    handleFiles(chosenFiles);
+  function handleDrop(e){
+    e.preventDefault();
+    setFile(e.dataTransfer.files)
   }
 
 
@@ -58,10 +50,10 @@ export function CalculationRequest(){
       complain: complain,
       claimed: claimed,
       notes: notes,
-      file: uploadedFiles
+      file: file
     };
 
-    console.log(uploadedFiles);
+    console.log(file);
     
     const headers = {
       'Content-Type': 'multipart/form-data',
@@ -210,20 +202,24 @@ export function CalculationRequest(){
 
                <div className='file'>
                     <label>Anexar Arquivo(s) do Processo</label>
-                    <div className="fileContainer" >
+                    <div 
+                     className="fileContainer" 
+                     onDragOver={handleDragOver}
+                     onDrop={handleDrop}>
                        <input 
                        type="file"
-                       onChange={handleFileEvent}
+                       onChange={e => setFile(e.target.files)}
+                       accept='application/pdf'
                        multiple
                        />
                        
                        <div>
                         {
-                          uploadedFiles.map((file, index)=>(
-                            <ul key={index}>
-                              <li>{file.name}</li>
-                            </ul>
-                          ))
+                            <ul>
+                            {
+                              Array.from(file).map((f, index)=><li key={index}>{f.name}</li>)
+                            }
+                          </ul>
                         }
                        </div>
                     </div>

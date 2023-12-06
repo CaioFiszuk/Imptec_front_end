@@ -23,30 +23,12 @@ export function CalculationRequest(){
    const [complain, setComplain] = useState("");
    const [claimed, setClaimed] = useState("");
    const [notes, setNotes] = useState("");
-   const [uploadedFiles, setUploadedFiles] = useState([]);
+   const [file, setFile] = useState("");
    const [lawyers, setLawyers] = useState([]);
    const navigate = useNavigate();
 
-   const handleFiles = files => {
-    const uploaded = [...uploadedFiles];
-
-    files.some((file)=>{
-      if(uploaded.findIndex((f)=>f.name === file.name) === -1){
-        uploaded.push(file);
-      }
-    });
-
-    setUploadedFiles(uploaded);
-  }
-
-  const handleFileEvent = (e) => {
-    const chosenFiles = Array.prototype.slice.call(e.target.files);
-    handleFiles(chosenFiles);
-  }
-
-
    async function createProcess(){
-
+    console.log('teste')
     const token = localStorage.getItem("@imptec:token");
    
     const payload = {
@@ -58,10 +40,8 @@ export function CalculationRequest(){
       complain: complain,
       claimed: claimed,
       notes: notes,
-      file: uploadedFiles
+      file: file
     };
-
-    console.log(uploadedFiles);
     
     const headers = {
       'Content-Type': 'multipart/form-data',
@@ -210,23 +190,8 @@ export function CalculationRequest(){
 
                <div className='file'>
                     <label>Anexar Arquivo(s) do Processo</label>
-                    <div className="fileContainer" >
-                       <input 
-                       type="file"
-                       onChange={handleFileEvent}
-                       multiple
-                       />
-                       
-                       <div>
-                        {
-                          uploadedFiles.map((file, index)=>(
-                            <ul key={index}>
-                              <li>{file.name}</li>
-                            </ul>
-                          ))
-                        }
-                       </div>
-                    </div>
+                    <input type="file"
+                    onChange={e => setFile(e.target.value)}/>
               </div>
 
                <Button type='button' onClick={createProcess}>Solicitar [C/L]</Button>
