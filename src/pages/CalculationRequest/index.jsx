@@ -61,7 +61,7 @@ export function CalculationRequest(){
       file: uploadedFiles
     };
 
-    console.log(uploadedFiles);
+    console.log("arquivo" + uploadedFiles);
     
     const headers = {
       'Content-Type': 'multipart/form-data',
