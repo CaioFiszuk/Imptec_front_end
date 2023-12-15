@@ -5,41 +5,37 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 
 export function UpdateCalculations(){
+    const navigate = useNavigate();
     const {number} = useParams();
 
-    const [process, setProcess] = useState([]);
-    const [numberProcess, setNumberProcess] = useState("");
-    const [type, setType] = useState("");
-    const [service, setService] = useState("");
-    const [complain, setComplain] = useState("");
-    const [claimed, setClaimed] = useState("");
-    const [dueDate, setDueDate] = useState("");
-    const [requesting, setRequesting] = useState("");
+    const [process, setProcess] = useState({
+      number: "",
+      type: "",
+      service_id: "",
+      due_date: "",
+      requesting: "",
+      complain: "",
+      claimed: "", 
+      id: "",
+    });
 
-    const navigate = useNavigate();
+    const handleChange = (e) => {
+      const processClone = { ...process };
+      processClone[e.target.name] = e.target.value;
+      setProcess(processClone);
+    };
  
     useEffect(()=>{
       axios.get(`https://exato.m2fsolucoes.com/api/process/getByProcess/${number}`)
       .then(res=>{
-        console.log(res);
+        console.log(res)
         setProcess(res.data[0])
       })
       .catch(err=>console.log(err))
-    }, []);
+    }, [number]);
 
     const handleUpdate = async ()=>{
       const token = localStorage.getItem("@imptec:token");
-
-      const payload = { 
-        number: numberProcess,
-        type: type,
-        service_id: service,
-        due_date: dueDate,
-        requesting: requesting,
-        complain: complain,
-        claimed: claimed,
-        
-      }
 
       const headers = {
         'Content-Type': 'application/json',
@@ -49,17 +45,20 @@ export function UpdateCalculations(){
 
       try
       {
-        const response = await axios.post("https://exato.m2fsolucoes.com/api/process/update", payload, { headers });
+        const response = await axios.post("https://exato.m2fsolucoes.com/api/process/update", process, { headers });
 
         const data = response.data;
   
         console.log(data);
+        navigate(-1);
 
       }catch(error){
         console.log(error);
       }
 
     }
+
+    
 
     return(
         <Container>
@@ -74,18 +73,24 @@ export function UpdateCalculations(){
                  <section>
                    <fieldset>
                      <div className='field'>
+ 
+                      <input type="hidden" name="id" value={process.id}/>
+
                       <label>Nº do Processo</label>
                       <input 
                         type="text" 
                         value={process.number}
-                        onChange={e => setNumberProcess(e.target.value)}
+                        onChange={handleChange}
+                        name='number'
                       />
                      </div>
 
                      <div className='field'>
                       <label>Tipo de Solicitação</label>
                       <select 
-                        onChange={e => setType(e.target.value)}
+                        value={process.type}
+                        onChange={handleChange}
+                        name='type'
                       >
                         <option value="Liquidação">Liquidação</option>
                         <option value="Contestação">Contestação</option>
@@ -95,7 +100,9 @@ export function UpdateCalculations(){
                      <div className='field'>
                       <label>Tipo de Trabalho</label>
                       <select 
-                        onChange={e => setService(e.target.value)}
+                        value={process.service_id}
+                        onChange={handleChange}
+                        name='service_id'
                       >
                         <option value="1">Inicial</option>
                         <option value="2">Sentença</option>
@@ -115,7 +122,9 @@ export function UpdateCalculations(){
                       <label>Prazo de Entrega</label>
                       <input 
                         type="date"
-                        onChange={e => setDueDate(e.target.value)} 
+                        value={process.due_date}
+                        onChange={handleChange}
+                        name='due_date' 
                       />
                      </div>
                     </fieldset>
@@ -125,7 +134,9 @@ export function UpdateCalculations(){
                       <label>Solicitante</label>
                       <input 
                         type="text"
-                        onChange={e => setRequesting(e.target.value)}
+                        value={process.requesting}
+                        onChange={handleChange}
+                        name='requesting'
                       />
                      </div>
 
@@ -134,15 +145,18 @@ export function UpdateCalculations(){
                       <input 
                         type="text"
                         value={process.complain} 
-                        onChange={e => setComplain(e.target.value)}
+                        onChange={handleChange}
+                        name='complain'
                       />
                      </div>
 
                      <div className='field'>
                       <label>Reclamado</label>
                       <input 
-                        type="text" 
-                        onChange={e => setClaimed(e.target.value)}
+                        type="text"
+                        value={process.claimed} 
+                        onChange={handleChange}
+                        name="claimed"
                       />
                      </div>
                     </fieldset>
@@ -156,7 +170,7 @@ export function UpdateCalculations(){
                       </thead>
                       <tbody>
                        <tr>
-                         <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                         <td>y</td>
                        </tr>
                       </tbody>
                     </table>

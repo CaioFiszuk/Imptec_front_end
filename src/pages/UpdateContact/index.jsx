@@ -6,22 +6,22 @@ import axios from 'axios';
 export function UpdateContact(){
     const {id} = useParams();
     const navigate = useNavigate();
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [company, setCompany] = useState("");
-    const [person, setPerson] = useState("");
+
+    const [person, setPerson] = useState({
+      name:"",
+      email:"",
+      phone:"",
+      company:""
+    });
+
+    const handleChange = (e) => {
+      const personClone = { ...person };
+      personClone[e.target.name] = e.target.value;
+      setPerson(personClone);
+    };
 
     const handleUpdate = async()=>{
       const token = localStorage.getItem("@imptec:token");
-
-      const payload = {
-        id: id,
-        name: name,
-        company: company,
-        email: email,
-        phone: phone
-      };
       
       const headers = {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export function UpdateContact(){
       };
 
       try {
-        await axios.post("https://exato.m2fsolucoes.com/api/peaple/update", payload, { headers });
+        await axios.post("https://exato.m2fsolucoes.com/api/peaple/update", person, { headers });
 
         navigate(-1);
 
@@ -39,32 +39,28 @@ export function UpdateContact(){
       }
     }
 
-    const getPerson = async()=>{
+    useEffect(()=>{
       const token = localStorage.getItem("@imptec:token");
 
-     const payload = {
-      id: id
-     }
-
-     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
-      };
-
-      try
-      {
-       const response = await axios.post("https://exato.m2fsolucoes.com/api/peaple/getById", payload, { headers });
-       setPerson(response.data);
-
-      } catch (error) {
-        console.log(error)
+      const payload = {
+       id: id
       }
-    }
+ 
+      const headers = {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${token}`,
+       'Accept': 'application/json'
+       };
+ 
+       
+        axios.post("https://exato.m2fsolucoes.com/api/peaple/getById", payload, { headers }).then(res=>{
+          setPerson(res.data)
+          
+        })
+        .catch(err=>console.log(err))
 
-    useEffect(()=>{
-      getPerson()
-    }, []);
+
+      }, [id]);
     
       return(
       <Container>
@@ -81,8 +77,9 @@ export function UpdateContact(){
                <label>Nome</label>
                <input 
                   type="text" 
-                  value={person.name ?? ''} 
-                  onChange={(e) => setName(e.target.value)}
+                  value={person.name}
+                  onChange={handleChange}
+                  name='name'
                />
              </div>
 
@@ -90,8 +87,9 @@ export function UpdateContact(){
               <label>E-mail</label>
               <input 
               type="text"
-  
-              onChange={e => setEmail(e.target.value)} 
+              value={person.email}
+              onChange={handleChange}
+              name='email'
               />
              </div>
 
@@ -99,8 +97,9 @@ export function UpdateContact(){
               <label>Telefone</label>
               <input 
               type="text"
-
-              onChange={e => setPhone(e.target.value)}  
+              value={person.phone}
+              onChange={handleChange}
+              name="phone" 
               />
              </div>
 
@@ -108,13 +107,14 @@ export function UpdateContact(){
               <label>Empresa</label>
               <input 
               type="text"
-
-              onChange={e => setCompany(e.target.value)} 
+              value={person.company}
+              onChange={handleChange}
+              name="company"
               />
              </div>
             </div>
 
-            <Button onClick={()=>handleUpdate()}>Atualizar</Button>
+            <Button onClick={handleUpdate}>Atualizar</Button>
            </div>
          </div>
         }
