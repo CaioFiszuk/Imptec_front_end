@@ -41,6 +41,7 @@ export const Container = styled.div`
             height: 3.5rem;
             outline: none;
             border: none;
+            font-size: 1.3rem;
          }
       }  
 

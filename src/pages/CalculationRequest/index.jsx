@@ -220,8 +220,8 @@ export function CalculationRequest(){
                        <div>
                         {
                           uploadedFiles.map((file, index)=>(
-                            <ul key={index}>
-                              <li>{file.name}</li>
+                            <ul key={index} className='fileList'>
+                              <li className='fileItens'>{file.name}</li>
                             </ul>
                           ))
                         }

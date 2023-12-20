@@ -161,26 +161,6 @@ export function UpdateCalculations(){
                      </div>
                     </fieldset>
 
-                    <fieldset>
-                     <table>
-                      <thead>
-                        <tr>
-                           <th>Arquivos Anexados</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                       <tr>
-                         <td>y</td>
-                       </tr>
-                      </tbody>
-                    </table>
-
-                    <div className='field'>
-                      <label>Anexar Arquivo(s) do Processo</label>
-                      <input type="file" className='file'/>
-                     </div>
-                    </fieldset>
-
                   <Button onClick={()=>handleUpdate()}>Atualizar [C/L]</Button>
                  </section>
                </div> 
