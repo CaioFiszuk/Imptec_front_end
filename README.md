@@ -1,7 +1,24 @@
 # Imptec
 
-### This app is a CRUD of a lawyer's company.
+## Sobre
+Este é um projeto desenvolvido exclusivamente para Imptec. Ele foi criado para  gerenciar clientes, exibir dashboards, etc.
 
-<p>It allows the user to register clients in the database, to list all the process by its type of service or status. All is connect by the server's URL</p>
+## Licença e Direitos de Uso
+Este software é **propriedade exclusiva** de Imptec.  
 
-<p>The technologies used in this App were ReactJs, styled-components (CSS), react-router-dom, axios, react-paginate and sweet-alert</p>
+- **Uso Interno Apenas:** O código-fonte, design e funcionalidades são restritos ao uso interno da empresa e não podem ser redistribuídos, modificados ou comercializados sem autorização formal.
+
+- **Proibida a Reprodução:** Qualquer tentativa de cópia, redistribuição ou uso externo sem permissão expressa será considerada uma violação de direitos autorais.  
+
+
+## Tecnologias Utilizadas
+- React.js
+- Axios
+- Styled-components
+- React Router Dom
+- React Paginate
+- React CSV
+- React Modal
+- React Sweet Alert 2
+- React Icons
+- Crypto js
